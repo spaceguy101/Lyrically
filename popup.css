@@ -1,0 +1,63 @@
+body{
+
+  overflow-y: scroll;
+font: 40px 'Roboto';
+background-color:white;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('../font/Roboto-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('../font/Roboto-Medium.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('../font/Roboto-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+
+#header {
+  top:30px;
+  position: relative;
+	font: 30px;
+	display: block;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.14), 2px 2px 4px rgba(0, 0, 0, 0.28);
+	width: 90% ;
+    height: 180px;
+	background-color:#4285f4;
+	margin: 0 auto;
+	text-align: center;
+  color:white;
+	}
+
+
+  .blink_me {
+    position: fixed;
+    background: red;
+    width: 100%;
+    height: 240px;
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 0.9s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+#content{
+top :30px;
+  position: relative;
+}
