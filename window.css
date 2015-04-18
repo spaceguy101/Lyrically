@@ -114,6 +114,31 @@ cursor: pointer;
   margin-top: 12px;
 }
 
+.searchText {
+
+position: fixed;
+top:45px;
+right:0px;
+background-color: black;
+color :white;
+
+    border: 1px solid #ccc;
+  display: none;
+  font-size: 10px;
+  margin-top: 12px;
+  padding: 5px;
+  text-transform: uppercase;
+}
+
+#svg1:hover  {
+    opacity:0.6;
+} 
+
+#svg:hover  .searchText {
+  display:block;
+}
+
+
 #frame
 {
   transition: all 0.5s ease;

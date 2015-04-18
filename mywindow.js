@@ -22,6 +22,7 @@ addEventListener("unload", function (event) {
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('svg').addEventListener('click', openPopup);
+    document.getElementById('bttn').addEventListener('click', input);
 });
 
 
@@ -36,10 +37,6 @@ function closePopup() {
 }
 
 
-
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('bttn').addEventListener('click', input);
-});
 
 function input(){
 
@@ -376,5 +373,3 @@ function spinner(opt){
 	}
 
 }
-
-
