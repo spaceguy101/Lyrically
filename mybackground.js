@@ -38,11 +38,12 @@ if(popupActive === false)
 		else heightWithoutPanel = 460;
 
 		chrome.windows.create({'url': 'mywindow.html', 'type': 'panel','width': 350,
-'height': 495, 'left': screen.width - 350,'top': screen.height - heightWithoutPanel},function (popup) {
+'height': heightWithoutPanel /* for panels , 495*/, 'left': screen.width - 350,'top': screen.height - heightWithoutPanel},function (popup) {
       popupId = popup.id;
 
       var isPanelEnabled = true ;
-      		isPanelEnabled = popup.alwaysOnTop;
+      		//
+      		//isPanelEnabled = popup.alwaysOnTop;  //Currently not including Panel show guide ,it will add many redundancy ,fix it later;
       
 
 

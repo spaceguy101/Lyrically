@@ -9,9 +9,8 @@ $.ajax({
 			dataType: 'jsonp',
 			type: 'GET',
 			error: function(jqXHR, textStatus, errorThrown){
-				document.getElementById('main').innerHTML= 'Sorry.. :( </br> Error Occured';
-					spinner('hide');
-					
+				
+					fetchLetra (artist,title);
 			},
 			success: function(googledata){
 					
@@ -30,18 +29,10 @@ $.ajax({
 				}
 				else {
 
-					spinner('hide');
-
-					document.getElementById('main').innerHTML= 'Sorry.. :( </br> <b>Lyrics not found...</b>' + '</br></br> <b>You May Try To:</b></br> <ul>\
-		  					<li>(<a target="_blank" href="https://www.google.com/search?q='+ artist+ ' '+ title+ ' lyrics">Search Google</a>).</li>\
-		  					<br>'+ 
-							'<li>Contribute by adding lyrics at ' + '<a href="'+ 'http://lyrics.wikia.com/'+artist+':'+title+'?action=edit' + '" target="_blank">LyricWiki</a>. </li></ul>';
-										
-										}
+					fetchLetra (artist,title);	
+				}
 				}catch(err){
-					spinner('hide');
-					document.getElementById('main').innerHTML= 'Sorry.. :( </br>Some Error occured';
-						
+					fetchLetra (artist,title);
 				}
 							
 				
@@ -56,10 +47,8 @@ function getLyricsFromLyricMastiURL(songURL,title,artist) {
 				type : 'GET',
 
 				error: function(jqXHR, textStatus, errorThrown){
-					spinner('hide');
-				document.getElementById('main').innerHTML= 'Sorry.. :( </br> Error Occured';
-					
-
+				fetchLetra (artist,title);
+			
 			},
 
 				success : function(songData, songStatus) {
@@ -67,15 +56,7 @@ function getLyricsFromLyricMastiURL(songURL,title,artist) {
 					lyrics = getLyricsFromRawHtml_masti(songData);
 					
 					if (lyrics.length === 0) {
-
-
-						spinner('hide');
-						
-					document.getElementById('main').innerHTML= 'Sorry.. :( </br> <b>Lyrics not found...</b>' +  '</br></br> <b>You May Try To:</b></br> <ul>\
-		  					<li>(<a target="_blank" href="https://www.google.com/search?q='+ artist+ ' '+ title+ ' lyrics">Search Google</a>).</li>\
-		  					<br>'+ 
-							'<li>Contribute by adding lyrics at ' + '<a href="'+ 'http://lyrics.wikia.com/'+artist+':'+title+'?action=edit' + '" target="_blank">LyricWiki</a>. </li></ul>';
-										
+					fetchLetra (artist,title);
 										
 					} else {
 
