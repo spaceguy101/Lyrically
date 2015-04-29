@@ -373,3 +373,9 @@ function spinner(opt){
 	}
 
 }
+
+
+function focusWindow(){
+var background = chrome.extension.getBackgroundPage();
+background.focusWindow();
+}

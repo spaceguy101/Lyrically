@@ -56,7 +56,8 @@ function getLyricsFromLyricWikiURL(songURL,title,artist) {
 					} else {
 
 						spinner('hide');
-
+						focusWindow();
+						$('#main').prop('style').removeProperty("white-space");
 						document.getElementById('main').innerHTML = lyrics + '</p> Source <a href="'
 								+ songURL + '" target="_blank">LyricWiki.  </a>';
 			

@@ -6,6 +6,7 @@ function showLetra (data,art,mus,arrayid) {
 				data.mus[arrayid].text = data.mus[arrayid].text.replace(/\r\n|\n|\r/gm, '<br />');
 				
 				lyrics= data.mus[arrayid].text;
+				focusWindow();
 				document.getElementById('main').innerHTML=lyrics + '</p> Source <a href="'
 								+ data.mus[arrayid].url + '" target="_blank"> Vagalume.com </a>';
 						$('.scrollbar').perfectScrollbar('update');;
@@ -39,7 +40,7 @@ function showLetra (data,art,mus,arrayid) {
 						});
 					}
 				}
-			} else  {
+			} else {
 				console.log('notfound');
 				// Song not found, but artist was found
 				// You can list all songs from Vagalume here

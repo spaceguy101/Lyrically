@@ -82,7 +82,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 	imgsrc=message.imgsrc;
 	site='others';
 	chrome.runtime.sendMessage({'msg':'change','artist':artist ,'title':title,'album':album,'site':site,'imgsrc':imgsrc});
-	if(popupActive === true) chrome.windows.update(popupId, { "focused": true });
+	
 	}
 	
 	//for youtube..
@@ -93,7 +93,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
         	title=message.title;
 		    site='youtube';
 			chrome.runtime.sendMessage({'msg':'change','title':title,'site':site,'imgsrc':imgsrc});
-			if(popupActive === true) chrome.windows.update(popupId, { "focused": true });
+			
 			
 			
 			
@@ -112,3 +112,6 @@ chrome.windows.update(popupId, { "focused": true });
 
 }
 
+function focusWindow(){
+if(popupActive === true) chrome.windows.update(popupId, { "focused": true });
+}

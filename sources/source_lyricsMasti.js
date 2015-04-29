@@ -59,9 +59,9 @@ function getLyricsFromLyricMastiURL(songURL,title,artist) {
 					fetchLetra (artist,title);
 										
 					} else {
-
+						$('#main').css("white-space", "pre-wrap");
 						spinner('hide');
-
+						focusWindow();
 						document.getElementById('main').innerHTML = lyrics + '</p> Source <a href="'
 								+ songURL + '" target="_blank">LyricMasti.com  </a>';
 						$('.scrollbar').perfectScrollbar('update');
@@ -79,12 +79,12 @@ function getLyricsFromLyricMastiURL(songURL,title,artist) {
 
 function getLyricsFromRawHtml_masti(data) 
 {
-	var filter = function() {
-		return this.nodeType === Node.TEXT_NODE|| $(this).is(' br, i, b, strong, em');
-	};
-	return $('<div>').append(
-			$(data).find('#lcontent1').contents().filter(filter)).remove().html();
+
+
+return $('<div>').append($(data).find('#lyrics').find('code')[0].innerHTML).html()/*.css("white-space", "pre-wrap")*/;
+
 }
+
 
 
 
