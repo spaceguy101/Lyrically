@@ -46,9 +46,9 @@ function showLetra (data,art,mus,arrayid) {
 				// You can list all songs from Vagalume here
 				document.getElementById('main').innerHTML =
 					'Sorry.. :( </br> <b>Lyrics not found...</b>' + '</br></br> <b>You May Try To:</b></br> <ul>\
-		  					<li>(<a target="_blank" href="https://www.google.com/search?q='+ artist+ ' '+ title+ ' lyrics">Search Google</a>).</li>\
+		  					<li>(<a target="_blank" href="https://www.google.com/search?q='+ art+ ' '+ mus+ ' lyrics">Search Google</a>).</li>\
 		  					<br>'+ 
-							'<li>Contribute by adding lyrics at ' + '<a href="'+ 'http://lyrics.wikia.com/'+artist+':'+title+'?action=edit' + '" target="_blank">LyricWiki</a>. </li></ul>';
+							'<li>Contribute by adding lyrics at ' + '<a href="'+ 'http://lyrics.wikia.com/'+art+':'+mus+'?action=edit' + '" target="_blank">LyricWiki</a>. </li></ul>';
 				
 			} 
 		}
