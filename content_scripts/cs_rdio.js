@@ -1,43 +1,36 @@
-Name = '';
-album = '';
-Artist1 = '';
-ImgSrc = '';
+Name = album = Artist1 = ImgSrc = '';
+count =0;
+
+function fetchTrackInfo(){
+	window.Name="";
+	window.album="";
+	window.Artist1="";
+
+	Name=$("span.text_metadata a.song_title").text().trim();
+	Artist1 =$("span.text_metadata a.artist_title").text().trim();
+	ImgSrc=$('.queue_art').attr('src');
+	console.log(Name);
+};
 
 
 
 
-setInterval(function() {	
+var trackChangeInterval = setInterval(function() {
+	var prevName = Name;
 
+  Name = album = Artist1 = '';
+  fetchTrackInfo();
+ 
 
-var prevName=window.Name;	
+	if (Name !== prevName && Name) {
+		chrome.runtime.sendMessage( {'msg' : 'trackInfo','artist' : Artist1,'title' : Name,'album' : album,'imgsrc':ImgSrc});
+	}
+}, 3000);
 
-window.Name = '';
-window.album = '';
-window.Artist1 = '';
-window.ImgSrc = '';
-
-
-	sudoName=$(".song_title").text().trim();
-	singers=$(".artist_title").text().trim();
-	commaIndex = singers.indexOf(",");
-	sudoArtist1 = (commaIndex === -1)?singers:singers.substring(0, commaIndex);
-
-		if (sudoName && sudoArtist1 ) {
-			
-			Name = sudoName;
-  			Artist1 = sudoArtist1;
-			ImgSrc=$('.queue_art').attr('src');
-			//clearInterval(refreshInterval);
-
-				if (Name !== prevName && Name) {
-					chrome.runtime.sendMessage( {'msg' : 'trackInfo','artist' : Artist1,'title' : Name,'album' : album,'imgsrc':ImgSrc});
-				}
 				
 
-		} 
 		
-	}, 1500);
-
+		
 
 
 

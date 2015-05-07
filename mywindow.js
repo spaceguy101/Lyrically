@@ -218,7 +218,7 @@ function processYoutubeData(str){
 			str = (str).replace(/ (ft|feat|Feat|Ft).*/i, '');
 			}
 			
-			var str_arr=[/official/gi,/video/gi,/full/gi,/song/gi,/exclusive/gi,/title/gi,/audio/gi,/latest/gi,/unplugged/gi,/bollywood/gi,/sing/gi,/along/gi,/(HD|HQ)/,/remix/gi,/Original/gi,/lyrical/gi,/Lyrics/gi];
+			var str_arr=[/official/gi,/video/gi,/full/gi,/song/gi,/exclusive/gi,/title/gi,/audio/gi,/latest/gi,/unplugged/gi,/bollywood/gi,/sing/gi,/along/gi,/(HD|HQ)/,/remix/gi,/Original/gi,/lyrical/gi,/Lyrics/gi,/lyric/gi,/1080p/gi,/720p/gi,/from/gi];
 			for(i=0;i<str_arr.length;i++)
 			{
 			str = (str).replace(str_arr[i], '');

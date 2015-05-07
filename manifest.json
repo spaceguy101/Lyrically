@@ -2,7 +2,7 @@
 {
   "name": "Lyrically",
   "short_name": "Lyrically",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Displays Lyrics Of The Song Playing On Youtube,Gaana,Saavn,Bopfm,GrooveShark,Guvera & Other Music Services",
    "author": "Shreyas" ,
   "background": {
@@ -53,7 +53,7 @@
   "page_action" :
   {
     "default_icon" : "images/icon64.png",
-    "default_title" : "Lyrical"
+    "default_title" : "Lyrically..♪♪♪"
   },
   "icons": {
       "128": "images/icon-128x128.png",

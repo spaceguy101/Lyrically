@@ -27,9 +27,17 @@ chrome.runtime.onInstalled.addListener(function(){
 localStorage["dontShowGuide"] = false ;
 });
 
-chrome.pageAction.onClicked.addListener(iconClicked);
+chrome.pageAction.onClicked.addListener(iconClicked); // How to open default browserAction popup or normal popup ??
 
-function iconClicked ()
+function iconClicked(){
+	if(title !='noName') openPopup(); //open popup
+	else {
+		showNoSongPlaying();        /// Think on Avoiding this to execute on every setTimeout 
+		setTimeout(iconClicked,1500);
+	}
+}
+
+function openPopup()
 {
 
 if(popupActive === false)
@@ -71,7 +79,9 @@ else chrome.windows.update(popupId, { "focused": true });
 }
 
 
+function showNoSongPlaying(){
 
+}
 
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
   // When we get a message from the content script
