@@ -12,9 +12,13 @@ Chrome Extension For Lyrics
  * *bop.fm*
  * *Guvera*
  * *Raaga*
- * *Grooveshark*
+ * *Grooveshark* [RIP]
  * *Spotify*
  
  #####Current Lyrics Sources : 
  * http://lyrics.wikia.com
  * www.lyricsmasti.com
+ * http://www.vagalume.com.br/
+  
+ #####For Artist Identification :
+ * https://musicbrainz.org/
