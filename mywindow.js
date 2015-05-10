@@ -1,7 +1,8 @@
 
 window.onload = function() {
+	
 	mainView = document.getElementById('main');
-	header = document.getElementById("header");
+	header = document.getElementById('header');
 	artist_name=document.getElementById('artist_name');
      $('.scrollbar').perfectScrollbar();
 	artist = '';
@@ -10,13 +11,10 @@ window.onload = function() {
 	 
 var background = chrome.extension.getBackgroundPage();
 
-addEventListener("unload", function (event) {
+addEventListener('unload', function (event) {
     background.popupActive= false;
 }, true);
-	
-
-
-}
+};
 
 
 
@@ -28,12 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function openPopup() {
-   $('#test').toggle( 400,"swing");
+   $('#test').toggle( 400,'swing');
 }
 
 function closePopup() {
    
-    $('#test').hide(400,"swing");
+    $('#test').hide(400,'swing');
 }
 
 
@@ -41,14 +39,14 @@ function closePopup() {
 function input(){
 
 
-$(".img-holder").hide();
-$("#imgart").hide();
+$('.img-holder').hide();
+$('#imgart').hide();
 
-document.getElementById("header-wrap").style.backgroundColor =
+document.getElementById('header-wrap').style.backgroundColor =
 document.body.style.borderColor ='#4285f4';
 
-artist = document.getElementById("artist").value;
-title = document.getElementById("title").value;
+artist = document.getElementById('artist').value;
+title = document.getElementById('title').value;
 spinner('show');
 getLyrics(artist, title);
 }
@@ -58,9 +56,9 @@ getLyrics(artist, title);
 
 chrome.runtime.sendMessage({'msg':'getTrackInfo'},function(request){
 
-a = true ;
-$(".img-holder").show();
-$("#imgart").show();
+//a = true ;
+$('.img-holder').show();
+$('#imgart').show();
 spinner('show');
 	
 	if (request.site == 'others'){
@@ -76,11 +74,11 @@ spinner('show');
 	
 	header.innerHTML = '' ;
 	processYoutubeData(request.title);
-	//searchLyricsWikia_google(request.title);
+	
 
 	}
 
-	  $("#imgart").attr("src", request.imgsrc);
+	  $('#imgart').attr('src', request.imgsrc);
 	  changeToDominantColor(request.imgsrc);
 
 	
@@ -89,39 +87,36 @@ spinner('show');
 chrome.runtime.onMessage.addListener(function(request, sender,
 		sendResponse) {
 
-	$(".img-holder").show();
-	$("#imgart").show();
+	$('.img-holder').show();
+	$('#imgart').show();
 	spinner('show');
 
-	if (request.msg == "change") {
+	if (request.msg == 'change') {
 	
 	if (request.site == 'others'){
-	
-	
-	//mainView.innerHTML = "Searching lyrics...";
+
 	
 	getLyrics(request.artist, request.title, request.album);
 	
 	
 	}
 	
-	 else if(request.site == 'youtube'){
+	 else if(request.site === 'youtube'){
 	
-	
-	//mainView.innerHTML = "Searching lyrics...";
+
 	
 	processYoutubeData(request.title);
-	//searchLyricsWikia_google(request.title);
+	
 	}
 	
-	$("#imgart").attr("src", request.imgsrc);
+	$('#imgart').attr('src', request.imgsrc);
 	changeToDominantColor(request.imgsrc);
 
 	}
 
 
 
-
+/*
 	if (request.msg == "show_panel_enable_guide"){
 		
 		a = false; 
@@ -156,10 +151,10 @@ chrome.runtime.onMessage.addListener(function(request, sender,
 
 	if (a) {
 		$('.imp_container').hide();
-		console.log('hide');
+		
 	}
 	else if (!a) $('.imp_container').show();
-
+*/
 
 
 });
@@ -171,7 +166,8 @@ function setHeader(artist, title)
 	if (title){
 		header.innerHTML = title;
 		artist_name.innerHTML=artist;
-		$("#artist_name").show(700);
+		$('#artist_name').css('display', 'block');
+		$('#header').css('top','0px');
 	}
 }
 
@@ -181,16 +177,13 @@ function getLyrics(artist, title, album)
 	
 	closePopup();
  
-	if (!title) {
-		spinner('hide');
-		mainView.innerHTML = 'Cannot Get Song title... :-( </br> You May Try Searching Manually';
-			setHeader('---','---');
-			setTimeout(openPopup, 3500);
+	if (!title || title === 'noName' || title === '') {
+		noName();
 		return; 
 	}
 
 	if (!artist) {
-		mainView.innerHTML = 'Searching Artsist Name...';
+		mainView.innerHTML = 'Searching for Artsist Name...';
 		getArtistFromMusicBrainz(title, album);
 		
 		return;
@@ -218,37 +211,33 @@ function processYoutubeData(str){
 			str = (str).replace(/ (ft|feat|Feat|Ft).*/i, '');
 			}
 			
-			var str_arr=[/official/gi,/video/gi,/full/gi,/song/gi,/exclusive/gi,/title/gi,/audio/gi,/latest/gi,/unplugged/gi,/bollywood/gi,/sing/gi,/along/gi,/(HD|HQ)/,/remix/gi,/Original/gi,/lyrical/gi,/Lyrics/gi,/lyric/gi,/1080p/gi,/720p/gi,/from/gi];
-			for(i=0;i<str_arr.length;i++)
+			var str_arr=[/official/gi,/video/gi,/full/gi,/song/gi,/exclusive/gi,/title/gi,/audio/gi,/latest/gi,/unplugged/gi,/bollywood/gi,/sing/gi,/along/gi,/(HD|HQ)/,/remix/gi,/Original/gi,/lyrical/gi,/Lyrics/gi,/lyric/gi,/1080p/gi,/720p/gi,/from/gi,/with/gi];
+			var i ,l = str_arr.length ;
+			for(i=0;i<l;i++)
 			{
 			str = (str).replace(str_arr[i], '');
 			}
 			
 			// condition whether to Get Lyrics by Youtube method or Other method....
-			var patt_title3 = new RegExp(/ \s*\|.*/g);
-			var patt_title1 = new RegExp(/\s*\'.*?\'\s*/g);
-			var patt_title2 = new RegExp(/\s*\".*?\"\s*/g);
-			var patt_title4 = new RegExp(/ \s*\I .*/g);
-			
-			if(patt_title1.test(str)||patt_title2.test(str)||patt_title3.test(str)||patt_title4.test(str))
+			if(/\s*\'.*?\'\s*/g.test(str)||/\s*\".*?\"\s*/g.test(str)||/ \s*\|.*/g.test(str)||/ \s*\I .*/g.test(str))
 			{
 			
 			
-			(str).replace(/ \s*\I .*/g, '');
-			str = (str).replace(/ \s*\|.*/g, '');
-			str = (str).replace(/\s*\|.*?\|\s*/g, ''); // Remove |.*|
+			str = str.replace(/ \s*\I .*/g, '');
+			str = str.replace(/ \s*\|.*/g, '');
+			str = str.replace(/\s*\|.*?\|\s*/g, ''); // Remove |.*|
 			str = str.replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2'); // capture 'Track title'
 			str = str.replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$2'); // capture "Track title"
-			str = (str).replace(/\s*\[.*?\]\s*/g, ' ');
-			str = (str).replace(/\s*\(.*?\)\s*/g, ' ');
+			str = str.replace(/\s*\[.*?\]\s*/g, ' ');
+			str = str.replace(/\s*\(.*?\)\s*/g, ' ');
 			
 
 			patt_str=new RegExp('-');
 			if(patt_str.test(str)){
 			
 			var commaIndex = str.indexOf("-");
-			 var title_sony = str.substring(0, commaIndex);
-			 var album_sony = str.substring(commaIndex+1, str.length);
+			var title_sony = str.substring(0, commaIndex);
+			var album_sony = str.substring(commaIndex+1, str.length);
 
 			getDataFromMusicBrainz_forYoutube(title_sony,album_sony);
 			}
@@ -269,10 +258,10 @@ function processYoutubeData(str){
 			{
 				
 		    str=str.replace(/-/,'');		
-			commaIndex = str.indexOf("-");
-			 title_sony = str.substring(0, commaIndex);
-			 album_sony = str.substring(commaIndex+1, str.length);
-			getDataFromMusicBrainz_forYoutube(title_sony,album_sony);
+			var commaIndex1 = str.indexOf('-');
+			var title_sony1 = str.substring(0, commaIndex1);
+			var album_sony1 = str.substring(commaIndex1+1, str.length);
+			getDataFromMusicBrainz_forYoutube(title_sony1,album_sony1);
 		
 			}
 			else searchGoogle(str);
@@ -284,11 +273,11 @@ function processYoutubeData(str){
 
 
 function searchGoogle(title)
-{
-				$("#artist_name").css("display", "none");
+{			
+				$('#artist_name').css('display', 'none');
 				title=title.replace(/[:;~*]/g,'');
 				header.innerHTML = title ;
-				searchLyricsWikia_google(title);
+				google(title);
 				
 			
 }
@@ -342,7 +331,7 @@ b=Math.floor(b/count);
 document.getElementById("header-wrap").style.backgroundColor = 
 document.body.style.borderColor = 'rgb(' + r + ',' + g + ',' + b + ')';
 }
-}
+};
 
 img.src =srcImg;
 
@@ -378,4 +367,11 @@ function spinner(opt){
 function focusWindow(){
 var background = chrome.extension.getBackgroundPage();
 background.focusWindow();
+}
+
+function noName(){
+		spinner('hide');
+		mainView.innerHTML = 'Cannot Get Song Name... </br> Is there a Song Playing ? </br>You May Try Searching Manually';
+			setHeader('---','---');
+			setTimeout(openPopup, 3000);
 }

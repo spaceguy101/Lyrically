@@ -28,8 +28,8 @@ function getURLFromLyricWiki(artist, title)
 
 						if (lyrics === 'Not found') {
 							
-							document.getElementById('main').innerHTML = 'Trying To Get Lyrics from LyricsMasti.com';
-							getLyricsFromLyricsMasti(title,artist);
+							document.getElementById('main').innerHTML = 'Trying To Get Lyrics by Google Search ';
+							google(title,artist);
 							
 						}
 						else
@@ -52,7 +52,7 @@ function getLyricsFromLyricWikiURL(songURL,title,artist) {
 					
 					if (lyrics.length === 0) {
 						document.getElementById('main').innerHTML = 'Trying To Get Lyrics from LyricsMasti.com';
-						getLyricsFromLyricsMasti(title,artist);
+						google(title,artist);
 					} else {
 
 						spinner('hide');

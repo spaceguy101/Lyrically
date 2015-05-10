@@ -19,7 +19,6 @@ else {
 ImgSrc=$('.watch-main-col link[itemprop="thumbnailUrl"]').attr('href');
 
 	if (Name !== prevName ) {
-		console.log(Name);
 		chrome.runtime.sendMessage({'title' : Name,'msg' : 'youtube_data','imgsrc':ImgSrc});
 	}
 }

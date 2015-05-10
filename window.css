@@ -2,7 +2,6 @@ body{
 
 text-rendering: optimizeLegibility;
 height: 460px;
-
 font: 15px 'Roboto';
 margin: 0px;
 padding:0px;
@@ -44,40 +43,39 @@ text-transform: capitalize;
 
 #header-wrap{
 
-position: fixed;
+position:relative;
 top:0px;
 height:50px;
 display:block;
 width:100%;
 box-shadow: 0 0 2px rgba(0, 0, 0, 0.14), 2px 2px 4px rgba(0, 0, 0, 0.28);
 background-color:#4285f4;
-transition: background-color 2.5s ease;
+transition: background-color 4.5s ease;
 }
 
 #actionbar {
-	position: fixed;
+	position: relative;
 	left:55px;
 	right:0px;
-
 	width: 260px;
-    height: 50px;
-
+  height: 50px;
 	text-align: center;
+
 	}
 
 #header {
-	position:relative;
+ 
 	width:50px;
-	font-size: 20px;
+	font-size: 23px;
 	color: white;
 	white-space: nowrap;
-	text-overflow: hidden;
+	
 }
 #artist_name{
-	font-size: 12px;
+  padding-top: 3px;
+	font-size: 13px;
 	color: white;
 	white-space: nowrap;
-	text-overflow: ellipsis;
 }
 
 .img-holder {

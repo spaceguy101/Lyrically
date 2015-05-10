@@ -1,8 +1,8 @@
 function showLetra (data,art,mus,arrayid) {
-			console.log('show');
+			
 			if (! arrayid) arrayid = 0;
 			if (data.type == 'exact' || data.type == 'aprox') {
-				console.log('exact');
+				
 				data.mus[arrayid].text = data.mus[arrayid].text.replace(/\r\n|\n|\r/gm, '<br />');
 				
 				lyrics= data.mus[arrayid].text;
@@ -41,9 +41,10 @@ function showLetra (data,art,mus,arrayid) {
 					}
 				}
 			} else {
-				console.log('notfound');
+				
 				// Song not found, but artist was found
 				// You can list all songs from Vagalume here
+				if(art == 'undefined') art = '' ;
 				document.getElementById('main').innerHTML =
 					'Sorry.. :( </br> <b>Lyrics not found...</b>' + '</br></br> <b>You May Try To:</b></br> <ul>\
 		  					<li>(<a target="_blank" href="https://www.google.com/search?q='+ art+ ' '+ mus+ ' lyrics">Search Google</a>).</li>\

@@ -2,8 +2,8 @@
 {
   "name": "Lyrically",
   "short_name": "Lyrically",
-  "version": "1.0.10",
-  "description": "Displays Lyrics Of The Song Playing On Youtube,Gaana,Saavn,Bopfm,GrooveShark,Guvera & Other Music Services",
+  "version": "1.0.11",
+  "description": "Lyrics Of Songs On Youtube,Gaana,Saavn,Bopfm,Guvera etc. Hindi English",
    "author": "Shreyas" ,
   "background": {
       "scripts": [ "jquery-2.1.1.min.js", "mybackground.js" ]
@@ -26,7 +26,7 @@
       "run_at": "document_end"
    }, {
       "js": ["content_scripts/cs_youtube.js","jquery-2.1.1.min.js" ],
-     "matches": [ "https://www.youtube.com/*" ],
+     "matches": [ "https://www.youtube.com/watch*" ],
       "run_at": "document_end"
    }, {
       "js": ["content_scripts/cs_bopfm.js","jquery-2.1.1.min.js" ],
