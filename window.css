@@ -232,6 +232,7 @@ margin: 0 auto;
 
 
 
+
 .popup {
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.14), 2px 2px 4px rgba(0, 0, 0, 0.28);  
 	border-style: solid;
@@ -243,20 +244,12 @@ margin: 0 auto;
     right:0px;  
     margin:auto;
     width:100%;
-    height:230px;
+    height:408px;
     padding:10px;
     background-color:rgb(255,255,255);
     z-index:100000000000000000;
 }
 
-
-#title{
-	margin-top:15px;
-	 margin-bottom:40px; 
-}
-#artist{
-	margin-bottom:25px; 
-}
 
 
 .btn {
@@ -325,87 +318,24 @@ margin: 0 auto;
 
 
 
-
-
-
-
-
-
-
-
-
 .group 			  { 
+
   position:relative; 
- 
+  color: #4285f4;
 }
+
+
+
+
 input 				{
+  height:35px;
   font-size:18px;
-  padding:10px 10px 10px 5px;
   display:block;
   width:100%;
-  border:none;
-  border-bottom:1px solid #757575;
-}
-input:focus 		{ outline:none; }
-
-/* LABEL ======================================= */
-label 				 {
-  color:#999; 
-  font-size:18px;
-  font-weight:normal;
-  position:absolute;
-  pointer-events:none;
-  left:5px;
-  top:10px;
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
-}
-
-/* active state */
-input:focus ~ label, input:valid ~ label 		{
-  top:-20px;
-  font-size:14px;
-  color:#5264AE;
-}
-
-
-
-/* active state */
-input:focus ~ .bar:before, input:focus ~ .bar:after {
-  width:50%;
-}
-
-/* HIGHLIGHTER ================================== */
-.highlight {
-  position:absolute;
-  height:60%; 
-  width:100px; 
-  top:25%; 
-  left:0;
-  pointer-events:none;
-  opacity:0.5;
-}
-
-/* active state */
-input:focus ~ .highlight {
-  -webkit-animation:inputHighlighter 0.3s ease;
-  -moz-animation:inputHighlighter 0.3s ease;
-  animation:inputHighlighter 0.3s ease;
-}
-
-/* ANIMATIONS ================ */
-@-webkit-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@-moz-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
+  -webkit-appearance: textfield;
+  padding: 1px;
+  background-color: white;
+  cursor: auto;
 }
 
 

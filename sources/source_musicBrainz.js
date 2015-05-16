@@ -1,4 +1,4 @@
-function getArtistFromMusicBrainz(title, album) {
+/*function getArtistFromMusicBrainz(title, album) {
 	var artist = '';
 	query = 'recording:"' + title + '" AND release:"' + album + '"';
 
@@ -28,16 +28,25 @@ function getArtistFromMusicBrainz(title, album) {
 			});
 }
 
+*/
 
 
-
-function getDataFromMusicBrainz_forYoutube(title2,album2) {
-	title2=title2.trim();
-	album2=album2.trim();
+function getDataFromMusicBrainz(title2,album2,artist) {
+	if(title2) title2=title2.trim() ;
+	if(album2) album2=album2.trim() ;
+	if(artist) artist=artist.trim() ;
 	
-	if(album2)
+	
+	if(album2 !== '' || album2 !== null || album2 == undefined)
 	query = 'recording:' + title2 + ' AND release:'+ album2 ;
-	else query = 'recording:' + title2 + ' AND country:IN';
+
+	if(album2=='' && artist=='') query = 'recording:' + title2 + ' AND country:IN';
+
+	if(artist != '' && artist != undefined){
+		query = 'recording:' + title2 + ' AND artist:'+ artist ;
+	}
+
+	console.log(query);
 	$
 			.ajax({
 				url : "http://musicbrainz.org/ws/2/recording",
@@ -55,7 +64,7 @@ function getDataFromMusicBrainz_forYoutube(title2,album2) {
 						
 					artistCredit = $(data).find("artist-credit");
 					if (artistCredit.length > 0 && title_arr.length >0) {
-						artist= artistCredit[0].getElementsByTagName("artist")[0]
+						_artist= artistCredit[0].getElementsByTagName("artist")[0]
 								.getElementsByTagName("name")[0].textContent;
 						
 					title=title_arr[0].textContent;			
@@ -63,16 +72,27 @@ function getDataFromMusicBrainz_forYoutube(title2,album2) {
 							
 					
 					if(title.length > title2.length - 2 && title.length < title2.length + 2)
-					getLyrics(artist, title, album);
+					getLyrics(_artist, title, album);
 					else
 						searchGoogle(title2 +' '+album2);
 						
 					} else {
 						
-						searchGoogle(title2 +' '+album2);
+						(artist) ? searchGoogle(artist +' '+title2) : searchGoogle(title2 +' '+album2);
 						
 					}
 				}
 
 			});
+}
+
+
+function searchGoogle(title)
+{			
+				$('#artist_name').css('display', 'none');
+				title=title.replace(/[:;~*]/g,'');
+				header.innerHTML = title ;
+				google(title);
+				
+			
 }

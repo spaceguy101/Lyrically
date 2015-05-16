@@ -1,7 +1,8 @@
+'use strict';
 var Name = '';
 var ImgSrc ='';
 
-var trackChangeInterval = setInterval(function() {
+setInterval(function() {
 	checkTrackChange();
 }, 3000);
 
@@ -18,9 +19,8 @@ else {
 }
 ImgSrc=$('.watch-main-col link[itemprop="thumbnailUrl"]').attr('href');
 
-	if (Name !== prevName ) {
+	if (Name !== prevName && (Name !=='' || Name !== undefined) ) {
 		chrome.runtime.sendMessage({'title' : Name,'msg' : 'youtube_data','imgsrc':ImgSrc});
 	}
 }
 
-console.log(Name);

@@ -42,14 +42,17 @@ function showLetra (data,art,mus,arrayid) {
 				}
 			} else {
 				
+				openPopup();
 				// Song not found, but artist was found
 				// You can list all songs from Vagalume here
-				if(art == 'undefined') art = '' ;
-				document.getElementById('main').innerHTML =
-					'Sorry.. :( </br> <b>Lyrics not found...</b>' + '</br></br> <b>You May Try To:</b></br> <ul>\
+				if(art == undefined) art = '' ;
+				document.getElementById('artist').value=art;
+   				document.getElementById('title').value=mus;
+				$('.popup').append(
+					'<div id= "popupdiv" style="text-align: center;"></br></br></br></br><b>You May Try:</b></br><ul>\
 		  					<li>(<a target="_blank" href="https://www.google.com/search?q='+ art+ ' '+ mus+ ' lyrics">Search Google</a>).</li>\
 		  					<br>'+ 
-							'<li>Contribute by adding lyrics at ' + '<a href="'+ 'http://lyrics.wikia.com/'+art+':'+mus+'?action=edit' + '" target="_blank">LyricWiki</a>. </li></ul>';
+							'<li>Contribute by adding lyrics at ' + '<a href="'+ 'http://lyrics.wikia.com/'+art+':'+mus+'?action=edit' + '" target="_blank">LyricWiki</a>. </li></ul></div> ');
 				
 			} 
 		}

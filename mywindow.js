@@ -8,9 +8,9 @@ window.onload = function() {
 	artist = '';
 	title = '' ;
 	album ='';
-	 
+	$('#popupdiv').innerHTML='';
+	
 var background = chrome.extension.getBackgroundPage();
-
 addEventListener('unload', function (event) {
     background.popupActive= false;
 }, true);
@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function openPopup() {
+
    $('#test').toggle( 400,'swing');
 }
 
@@ -184,7 +185,7 @@ function getLyrics(artist, title, album)
 
 	if (!artist) {
 		mainView.innerHTML = 'Searching for Artsist Name...';
-		getArtistFromMusicBrainz(title, album);
+		getDataFromMusicBrainz(title, album,'');
 		
 		return;
 	}
@@ -206,83 +207,63 @@ function processYoutubeData(str){
 	str = (str).replace(/ (Feat|ft|feat|Ft).*?\-/i, '');
 
 	//CLEANING title...
-			if(/(ft|feat|Feat|Ft)/gi.test(str))
-			{
-			str = (str).replace(/ (ft|feat|Feat|Ft).*/i, '');
+			if(/(ft|feat|Feat|Ft)/gi.test(str)){
+				str = (str).replace(/ (ft|feat|Feat|Ft).*/i, '');
 			}
 			
-			var str_arr=[/official/gi,/video/gi,/full/gi,/song/gi,/exclusive/gi,/title/gi,/audio/gi,/latest/gi,/unplugged/gi,/bollywood/gi,/sing/gi,/along/gi,/(HD|HQ)/,/remix/gi,/Original/gi,/lyrical/gi,/Lyrics/gi,/lyric/gi,/1080p/gi,/720p/gi,/from/gi,/with/gi];
+			var str_arr=[/\s+\(\s*(HD|HQ)\s*\)$/,/\s*\(\s*of+icial\s*\)/gi,/\s*(of+icial\s*)?(music\s*)?video/i,/\s*\(\s*[0-9]{4}\s*\)/i,/Official/gi,/video/gi,/full/gi,/song/gi,/exclusive/gi,/title/gi,/audio/gi,/latest/gi,/unplugged/gi,/bollywood/gi,/sing/gi,/along/gi,/remix/gi,/Original/gi,/lyrical/gi,/Lyrics/gi,/lyric/gi,/1080p/gi,/720p/gi,/from/gi,/with/gi];
 			var i ,l = str_arr.length ;
-			for(i=0;i<l;i++)
-			{
-			str = (str).replace(str_arr[i], '');
+			for(i=0;i<l;i++){
+				str = (str).replace(str_arr[i], '');
 			}
-			
-			// condition whether to Get Lyrics by Youtube method or Other method....
-			if(/\s*\'.*?\'\s*/g.test(str)||/\s*\".*?\"\s*/g.test(str)||/ \s*\|.*/g.test(str)||/ \s*\I .*/g.test(str))
-			{
-			
-			
-			str = str.replace(/ \s*\I .*/g, '');
-			str = str.replace(/ \s*\|.*/g, '');
-			str = str.replace(/\s*\|.*?\|\s*/g, ''); // Remove |.*|
-			str = str.replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2'); // capture 'Track title'
-			str = str.replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$2'); // capture "Track title"
-			str = str.replace(/\s*\[.*?\]\s*/g, ' ');
-			str = str.replace(/\s*\(.*?\)\s*/g, ' ');
-			
-
-			patt_str=new RegExp('-');
-			if(patt_str.test(str)){
-			
-			var commaIndex = str.indexOf("-");
-			var title_sony = str.substring(0, commaIndex);
-			var album_sony = str.substring(commaIndex+1, str.length);
-
-			getDataFromMusicBrainz_forYoutube(title_sony,album_sony);
-			}
-				else getDataFromMusicBrainz_forYoutube(str,'');
-				
-
-			}
-			
-			
-			
-			//For Non-Indian
-			else{
-			
 			str = (str).replace(/\s*\[.*?\]\s*/g, ' ');
 			str = (str).replace(/\s*\(.*?\)\s*/g, ' ');
+
 			
-			if(/-/.test(str)&&(str.indexOf('-')!=str.lastIndexOf('-')))
-			{
+			if(/\s*\'.*?\'\s*/g.test(str)||/\s*\".*?\"\s*/g.test(str)||/ \s*\|.*/g.test(str)||/ \s*\I .*/g.test(str)){ 
+			// Bollywood
+			str = str.replace(/ \s*\I .*/g, ''); // Remove I***...
+			str = str.replace(/ \s*\|.*/g, '');// Remove |***...
+			str = str.replace(/\s*\|.*?\|\s*/g, ''); // Remove |***|
+			str = str.replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2'); // capture 'Track title'
+			str = str.replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$2'); // capture "Track title"
+
+			if(/-/.test(str)){
+			
+			var Index = str.indexOf("-");
+			var _title = str.substring(0, Index);
+			var _album = str.substring(Index+1, str.length);
+			getDataFromMusicBrainz(_title,_album);
+
+			}
+				else getDataFromMusicBrainz(str,'',''); 
 				
+
+			}
+			
+	
+			else{
+		
+			if(/-/.test(str)&&(str.indexOf('-')!=str.lastIndexOf('-'))){ 
+			//Bollywood		
 		    str=str.replace(/-/,'');		
-			var commaIndex1 = str.indexOf('-');
-			var title_sony1 = str.substring(0, commaIndex1);
-			var album_sony1 = str.substring(commaIndex1+1, str.length);
-			getDataFromMusicBrainz_forYoutube(title_sony1,album_sony1);
+			var Index = str.indexOf('-');
+			var _title = str.substring(0, Index);
+			var _album = str.substring(Index+1, str.length);
+			getDataFromMusicBrainz(_title,_album); //For Bollywood Songs there is no artist name,only title And album
 		
 			}
-			else searchGoogle(str);
+			else { // English Songs
+			var Index = str.indexOf('-');
+			var _artist = str.substring(0, Index);
+			var _title = str.substring(Index+1, str.length);
+			getDataFromMusicBrainz(_title,'',_artist);   // getDataFromMusicBrainz_forYoutube(title2,album2,artist);
+			}
 			
 			
 			}
 	
 }
-
-
-function searchGoogle(title)
-{			
-				$('#artist_name').css('display', 'none');
-				title=title.replace(/[:;~*]/g,'');
-				header.innerHTML = title ;
-				google(title);
-				
-			
-}
-
-
 
 
 
@@ -375,3 +356,33 @@ function noName(){
 			setHeader('---','---');
 			setTimeout(openPopup, 3000);
 }
+
+/*
+function parseInfo(artistTitle) {
+   var artist = '';
+   var track = '';
+
+   var separator = findSeparator(artistTitle);
+   if (separator == null)
+      return { artist: '', track: '' };
+
+   artist = artistTitle.substr(0, separator.index);
+   track = artistTitle.substr(separator.index + separator.length);
+
+   return cleanArtistTrack(artist, track);
+}
+
+function findSeparator(str) {
+   // care - minus vs hyphen
+   var separators = [' - ', ' – ', '-', '–', ':'];
+
+   for (i in separators) {
+      var sep = separators[i];
+      var index = str.indexOf(sep);
+      if (index > -1)
+         return { index: index, length: sep.length };
+   }
+
+   return null;
+}
+*/

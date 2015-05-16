@@ -1,3 +1,5 @@
+'use strict';
+var Name , album , Artist1 , ImgSrc;
 Name = album = Artist1 = ImgSrc = '';
 
 String.prototype.capitalize=function(all){
@@ -24,7 +26,7 @@ ImgSrc=$('.album-thumb').attr('src');
 
 
 
-	if (Name !== prevName && Name) {
+	if (Name !== prevName && (Name !=='' || Name !== undefined)) {
 		chrome.runtime.sendMessage( {'msg' : 'trackInfo','artist' : Artist1,'title' : Name,'album' : album,'imgsrc':ImgSrc});
 	}
 }, 3000);

@@ -1,10 +1,12 @@
+'use strict';
+var Name , album , Artist1 , ImgSrc;
 Name = album = Artist1 = ImgSrc = '';
 
 
-var trackChangeInterval = setInterval(function() {
+setInterval(function() {
 	var prevName = Name;
 	fetchTrackInfo();
-	if (Name !== prevName && Name) {
+	if (Name !== prevName && (Name !=='' || Name !== undefined)) {
 		console.log(Name);
 		chrome.runtime.sendMessage( {'msg' : 'trackInfo','artist' : Artist1,'title' : Name,'album' : album,'imgsrc':ImgSrc});
 	}
