@@ -6,16 +6,18 @@ font: 15px 'Roboto';
 margin: 0px;
 padding:0px;
 overflow: hidden; 
+
+
+}
+.container{
 border-left-style: solid;
 border-left-width: 2px;
-border-left-color: #4285f4;
+border-color: #4285f4;
 border-right-style: solid;
 border-right-width: 2px;
-border-right-color: #4285f4;
 border-bottom-style: solid;
 border-bottom-width: 2px;
-border-bottom-color: #4285f4;
-
+transition: border-color 4.5s ease;
 }
 #main{
 text-transform: capitalize;
@@ -142,16 +144,12 @@ color :white;
 #frame
 {
   transition: all 0.5s ease;
-min-height: 410px;
-max-height: 410px;
-height: 410px;
 }
 
 .scrollbar
 {	
   transition: all 0.5s ease;
 	top:50px;
-	height: 410px;
 	width: 100%;
 	float: left;
 	margin-bottom: auto;

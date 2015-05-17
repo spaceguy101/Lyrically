@@ -31,18 +31,26 @@
 */
 
 
+
 function getDataFromMusicBrainz(title2,album2,artist) {
+	closePopup();
 	if(title2) title2=title2.trim() ;
 	if(album2) album2=album2.trim() ;
 	if(artist) artist=artist.trim() ;
 	
+	if (!title2 || title2 === 'noName' || title2 === '') {
+		noName();
+		return; 
+	}
 	
-	if(album2 !== '' || album2 !== null || album2 == undefined)
+	if(album2 !== '' || album2 !== null || album2 !== undefined){
 	query = 'recording:' + title2 + ' AND release:'+ album2 ;
+	}	
 
-	if(album2=='' && artist=='') query = 'recording:' + title2 + ' AND country:IN';
-
-	if(artist != '' && artist != undefined){
+	if((album2=='' || album2 == undefined) && (artist=='' || artist == undefined)) {
+		query = 'recording:' + title2 + ' AND country:IN';
+	}
+	if(artist !== '' && artist !== undefined){
 		query = 'recording:' + title2 + ' AND artist:'+ artist ;
 	}
 
@@ -78,7 +86,7 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 						
 					} else {
 						
-						(artist) ? searchGoogle(artist +' '+title2) : searchGoogle(title2 +' '+album2);
+						(artist && album2== undefined) ? searchGoogle(artist +' '+title2) : searchGoogle(title2 +' '+album2);
 						
 					}
 				}

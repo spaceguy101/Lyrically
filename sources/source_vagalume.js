@@ -1,3 +1,4 @@
+
 function showLetra (data,art,mus,arrayid) {
 			
 			if (! arrayid) arrayid = 0;
@@ -41,7 +42,8 @@ function showLetra (data,art,mus,arrayid) {
 					}
 				}
 			} else {
-				
+
+					
 				openPopup();
 				// Song not found, but artist was found
 				// You can list all songs from Vagalume here

@@ -1,7 +1,9 @@
+'use strict';
+var Name , album , Artist1 , ImgSrc;
 Name = album = Artist1 = ImgSrc = '';
 
 
-var trackChangeInterval = setInterval(function() {
+setInterval(function() {
 	var prevName = Name;
 
   Name = album = Artist1 = '';

@@ -125,3 +125,7 @@ chrome.windows.update(popupId, { "focused": true });
 function focusWindow(){
 if(popupActive === true) chrome.windows.update(popupId, { "focused": true });
 }
+
+function closeWindow(){
+if(popupActive === true) chrome.windows.remove(popupId, function(){});
+}

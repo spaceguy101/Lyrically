@@ -1,7 +1,6 @@
 'use strict';
 var Name , album , Artist1 , ImgSrc;
 Name = album = Artist1 = ImgSrc = '';
-count =0;
 
 function fetchTrackInfo(){
 	window.Name="";
@@ -11,8 +10,7 @@ function fetchTrackInfo(){
 	Name=$("span.text_metadata a.song_title").text().trim();
 	Artist1 =$("span.text_metadata a.artist_title").text().trim();
 	ImgSrc=$('.queue_art').attr('src');
-	console.log(Name);
-};
+}
 
 
 

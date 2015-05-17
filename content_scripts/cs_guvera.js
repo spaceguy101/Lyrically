@@ -8,16 +8,16 @@ String.prototype.capitalize=function(all){
     }else{
          return this.charAt(0).toUpperCase() + this.slice(1);
     } 
-}
+};
 
-var trackChangeInterval = setInterval(function() {
+setInterval(function() {
 	var prevName = Name;
 
   Name = Artist1 = ImgSrc ='';
   
 Name= $('#player').find('.track-title a').text();
-singers=$('#player').find('.artist-name a')[0].innerText;
-commaIndex = singers.indexOf(",");
+var singers=$('#player').find('.artist-name a')[0].innerText;
+var commaIndex = singers.indexOf(",");
  Artist1 = (commaIndex === -1)?singers:singers.substring(0, commaIndex);
  Artist1=Artist1.toLowerCase();
  Artist1 = Artist1.capitalize(true);

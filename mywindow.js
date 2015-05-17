@@ -4,7 +4,7 @@ window.onload = function() {
 	mainView = document.getElementById('main');
 	header = document.getElementById('header');
 	artist_name=document.getElementById('artist_name');
-     $('.scrollbar').perfectScrollbar();
+    $('.scrollbar').perfectScrollbar();
 	artist = '';
 	title = '' ;
 	album ='';
@@ -14,6 +14,18 @@ var background = chrome.extension.getBackgroundPage();
 addEventListener('unload', function (event) {
     background.popupActive= false;
 }, true);
+
+    $('.scrollbar').css('height', $(window).height() - 50);
+    $('.container').css('height', $(window).height());
+
+$(window).on('resize',function(){
+    $('.scrollbar').css('height', $(window).height() - 50);
+    $('.container').css('height', $(window).height());
+    $('.scrollbar').perfectScrollbar('update');
+});
+
+ 		
+
 };
 
 
@@ -43,13 +55,13 @@ function input(){
 $('.img-holder').hide();
 $('#imgart').hide();
 
-document.getElementById('header-wrap').style.backgroundColor =
-document.body.style.borderColor ='#4285f4';
+document.getElementById('header-wrap').style.backgroundColor ='#4285f4'; 
+$('.container').css('border-color','#4285f4');
 
 artist = document.getElementById('artist').value;
 title = document.getElementById('title').value;
 spinner('show');
-getLyrics(artist, title);
+getDataFromMusicBrainz(title,'',artist);
 }
 	
 
@@ -309,8 +321,8 @@ r=Math.floor(r/count);
 g=Math.floor(g/count);
 b=Math.floor(b/count);
 
-document.getElementById("header-wrap").style.backgroundColor = 
-document.body.style.borderColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+document.getElementById("header-wrap").style.backgroundColor =  'rgb(' + r + ',' + g + ',' + b + ')';
+$('.container').css('border-color','rgb(' + r + ',' + g + ',' + b + ')');
 }
 };
 
@@ -352,37 +364,8 @@ background.focusWindow();
 
 function noName(){
 		spinner('hide');
-		mainView.innerHTML = 'Cannot Get Song Name... </br> Is there a Song Playing ? </br>You May Try Searching Manually';
+		mainView.innerHTML = 'Cannot Get Song Name... </br></br>You May Try Searching Manually';
 			setHeader('---','---');
 			setTimeout(openPopup, 3000);
 }
 
-/*
-function parseInfo(artistTitle) {
-   var artist = '';
-   var track = '';
-
-   var separator = findSeparator(artistTitle);
-   if (separator == null)
-      return { artist: '', track: '' };
-
-   artist = artistTitle.substr(0, separator.index);
-   track = artistTitle.substr(separator.index + separator.length);
-
-   return cleanArtistTrack(artist, track);
-}
-
-function findSeparator(str) {
-   // care - minus vs hyphen
-   var separators = [' - ', ' – ', '-', '–', ':'];
-
-   for (i in separators) {
-      var sep = separators[i];
-      var index = str.indexOf(sep);
-      if (index > -1)
-         return { index: index, length: sep.length };
-   }
-
-   return null;
-}
-*/
