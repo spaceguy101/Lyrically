@@ -27,6 +27,7 @@ addEventListener('unload', function (event) {
 
 
 getBGdata();
+
 };
 
 

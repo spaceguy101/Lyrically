@@ -1,6 +1,11 @@
 Name = album = Artist1 = ImgSrc = '';
 
 
+window.addEventListener ("load", interval , false);
+
+function interval(){
+
+
 var trackChangeInterval = setInterval(function() {
 	var prevName = Name;
 	fetchTrackInfo();
@@ -9,7 +14,7 @@ var trackChangeInterval = setInterval(function() {
 	}
 }, 3000);
 
-
+}
 
 function fetchTrackInfo(){
 	

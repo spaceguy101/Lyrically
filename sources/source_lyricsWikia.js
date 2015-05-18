@@ -51,7 +51,7 @@ function getLyricsFromLyricWikiURL(songURL,title,artist) {
 					lyrics = getLyricsFromRawHtml_wikia(songData);
 					
 					if (lyrics.length === 0) {
-						document.getElementById('main').innerHTML = 'Trying To Get Lyrics from LyricsMasti.com';
+						document.getElementById('main').innerHTML = 'Trying To Get Lyrics by Google Search';
 						google(title,artist);
 					} else {
 

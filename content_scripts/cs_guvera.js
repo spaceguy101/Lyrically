@@ -10,6 +10,10 @@ String.prototype.capitalize=function(all){
     } 
 };
 
+window.addEventListener ("load", interval , false);
+
+function interval(){
+
 setInterval(function() {
 	var prevName = Name;
 
@@ -31,5 +35,4 @@ ImgSrc=$('.album-thumb').attr('src');
 	}
 }, 3000);
 
-
-
+}

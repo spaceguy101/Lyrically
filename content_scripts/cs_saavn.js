@@ -2,6 +2,9 @@
 var Name , album , Artist1 , ImgSrc;
 Name = album = Artist1 = ImgSrc = '';
 
+window.addEventListener ("load", interval , false);
+
+function interval(){
 
 setInterval(function() {
 	var prevName = Name;
@@ -11,7 +14,7 @@ setInterval(function() {
 		chrome.runtime.sendMessage( {'msg' : 'trackInfo','artist' : Artist1,'title' : Name,'album' : album,'imgsrc':ImgSrc});
 	}
 }, 3000);
-
+}
 
 
 //saavn.com

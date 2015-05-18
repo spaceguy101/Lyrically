@@ -2,7 +2,10 @@
 var Name , album , Artist1 , ImgSrc;
 Name = album = Artist1 = ImgSrc = '';
 
+window.addEventListener ("load", interval , false);
 
+function interval(){
+	
 setInterval(function() {
 	var prevName = Name;
 	
@@ -17,4 +20,4 @@ setInterval(function() {
 	}
 }, 3000);
 
-
+}

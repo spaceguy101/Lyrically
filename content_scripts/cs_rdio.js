@@ -13,6 +13,10 @@ function fetchTrackInfo(){
 }
 
 
+window.addEventListener ("load", interval , false);
+
+function interval(){
+
 
  setInterval(function() {
 	var prevName = Name;
@@ -25,8 +29,8 @@ function fetchTrackInfo(){
 		chrome.runtime.sendMessage( {'msg' : 'trackInfo','artist' : Artist1,'title' : Name,'album' : album,'imgsrc':ImgSrc});
 	}
 }, 3000);
-
-				
+ 
+}			
 
 		
 		
