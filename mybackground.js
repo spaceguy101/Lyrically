@@ -1,10 +1,10 @@
-artist = '';
-title = '' ;
-album ='';
-site='';
-imgsrc='';
-popupActive= false;
-popupId='';
+var artist = '';
+var title = '' ;
+var album ='';
+var site='';
+var imgsrc='';
+var popupActive= false;
+var popupId='';
 
 
 chrome.tabs.onUpdated.addListener(function (tabId,Info, tab) {

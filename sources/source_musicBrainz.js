@@ -35,7 +35,7 @@
 function getDataFromMusicBrainz(title2,album2,artist) {
 	closePopup();
 	if(title2) title2=title2.trim() ;
-	if(album2) album2=album2.trim() ;
+	if(album2) album2=album2.trim() ;else album2 = '';
 	if(artist) artist=artist.trim() ;
 	
 	if (!title2 || title2 === 'noName' || title2 === '') {
@@ -80,7 +80,7 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 							
 					
 					if(title.length > title2.length - 2 && title.length < title2.length + 2)
-					getLyrics(_artist, title, album);
+					getLyrics(_artist, title, album2);
 					else
 						searchGoogle(title2 +' '+album2);
 						

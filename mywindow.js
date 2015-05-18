@@ -1,19 +1,15 @@
 
 window.onload = function() {
-	
+	$('.scrollbar').perfectScrollbar();
 	mainView = document.getElementById('main');
 	header = document.getElementById('header');
 	artist_name=document.getElementById('artist_name');
-    $('.scrollbar').perfectScrollbar();
-	artist = '';
-	title = '' ;
-	album ='';
+	artist='';
+	title='';
+	album='';
+	imgsrc='';
+
 	$('#popupdiv').innerHTML='';
-	
-var background = chrome.extension.getBackgroundPage();
-addEventListener('unload', function (event) {
-    background.popupActive= false;
-}, true);
 
     $('.scrollbar').css('height', $(window).height() - 50);
     $('.container').css('height', $(window).height());
@@ -24,8 +20,13 @@ $(window).on('resize',function(){
     $('.scrollbar').perfectScrollbar('update');
 });
 
- 		
+var background = chrome.extension.getBackgroundPage();
+addEventListener('unload', function (event) {
+    background.popupActive= false;
+}, true);
 
+
+getBGdata();
 };
 
 
@@ -65,7 +66,7 @@ getDataFromMusicBrainz(title,'',artist);
 }
 	
 
-
+/*
 
 chrome.runtime.sendMessage({'msg':'getTrackInfo'},function(request){
 
@@ -96,6 +97,54 @@ spinner('show');
 
 	
 });
+*/
+function getBGdata(){	
+chrome.runtime.getBackgroundPage(function(background){
+
+site = background.site;
+artist = background.artist;
+title = background.title ;
+album = background.album;
+imgsrc = background.imgsrc;
+getTrackInfoFromBG(title,artist,album,site,imgsrc);
+
+});
+}
+
+
+
+function getTrackInfoFromBG(title_,artist_,album_,site_,imgsrc_){
+$('.img-holder').show();
+$('#imgart').show();
+spinner('show');
+
+if(!title_|| title_ == undefined){
+setTimeout(getBGdata,2000);
+return;
+}
+
+	if (site_ == 'others'){
+	
+	
+	   getLyrics(artist_, title_, album_);
+	 
+	  }
+	  
+	  
+    else if(site_ == 'youtube'){
+	
+	
+	document.getElementById('header').innerHTML = '' ;
+	processYoutubeData(title_);
+	
+
+	}
+
+	  $('#imgart').attr('src', imgsrc_);
+	  changeToDominantColor(imgsrc_);
+
+}
+
 
 chrome.runtime.onMessage.addListener(function(request, sender,
 		sendResponse) {
@@ -216,7 +265,7 @@ function processYoutubeData(str){
 
 	closePopup();
 	
-	str = (str).replace(/ (Feat|ft|feat|Ft).*?\-/i, '');
+	str = str.replace(/ (Feat|ft|feat|Ft).*?\-/i, '');
 
 	//CLEANING title...
 			if(/(ft|feat|Feat|Ft)/gi.test(str)){
