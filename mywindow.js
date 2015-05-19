@@ -230,7 +230,6 @@ function setHeader(artist, title)
 		header.innerHTML = title;
 		artist_name.innerHTML=artist;
 		$('#artist_name').css('display', 'block');
-		$('#header').css('top','0px');
 	}
 }
 
@@ -266,7 +265,7 @@ function processYoutubeData(str){
 
 	closePopup();
 	
-	str = str.replace(/ (Feat|ft|feat|Ft).*?\-/i, '');
+	str = str.replace(/ (Feat|ft|feat|Ft).*?\-/i, ' -');
 
 	//CLEANING title...
 			if(/(ft|feat|Feat|Ft)/gi.test(str)){
@@ -280,6 +279,7 @@ function processYoutubeData(str){
 			}
 			str = (str).replace(/\s*\[.*?\]\s*/g, ' ');
 			str = (str).replace(/\s*\(.*?\)\s*/g, ' ');
+			
 
 			
 			if(/\s*\'.*?\'\s*/g.test(str)||/\s*\".*?\"\s*/g.test(str)||/ \s*\|.*/g.test(str)||/ \s*\I .*/g.test(str)){ 

@@ -43,12 +43,12 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 		return; 
 	}
 	
-	if(album2 !== '' || album2 !== null || album2 !== undefined){
+	if(!(!album2) || album2 !== undefined){
 	query = 'recording:' + title2 + ' AND release:'+ album2 ;
 	}	
 
-	if((album2=='' || album2 == undefined) && (artist=='' || artist == undefined)) {
-		query = 'recording:' + title2 + ' AND country:IN';
+	if(( !album2 || album2 == undefined) && (!artist || artist == undefined)) {
+		query = 'recording:' + title2 ;
 	}
 	if(artist !== '' && artist !== undefined){
 		query = 'recording:' + title2 + ' AND artist:'+ artist ;
@@ -62,6 +62,7 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 					query : query
 				},
 				type : "GET",
+				cache: true,
 				error : function(jqXHR, textStatus, errorThrown) {
 					searchGoogle(title2);
 				},
