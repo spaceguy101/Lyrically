@@ -41,7 +41,7 @@ function getURLFromLyricWiki(artist, title)
 			});
 }
 
-function getLyricsFromLyricWikiURL(songURL,title,artist) {
+function getLyricsFromLyricWikiURL(songURL,title,artist,from) {
 	$
 			.ajax({
 				url : songURL,
@@ -50,9 +50,15 @@ function getLyricsFromLyricWikiURL(songURL,title,artist) {
 					
 					lyrics = getLyricsFromRawHtml_wikia(songData);
 					
-					if (lyrics.length === 0) {
+					
+					if (lyrics.length === 0  ) {
+						if(from !=='gsearch'/* avoid recursion*/){
 						document.getElementById('main').innerHTML = 'Trying To Get Lyrics by Google Search';
 						google(title,artist);
+						console.log('nothere');
+					}else{
+						fetchLetra (artist,title);
+					}
 					} else {
 
 						spinner('hide');

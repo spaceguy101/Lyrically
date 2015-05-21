@@ -24,7 +24,7 @@ $.ajax({
 
 						if(ResultUrl.indexOf('lyrics.wikia') > -1){
 							url_lyricsWikia = ResultUrl;
-							getLyricsFromLyricWikiURL(url_lyricsWikia,title,'');
+							getLyricsFromLyricWikiURL(url_lyricsWikia,title,'','gsearch');
 							console.log('wikia');
 						}
 						else if(ResultUrl.indexOf('lyricsmasti') > -1){

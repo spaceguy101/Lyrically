@@ -271,8 +271,8 @@ function processYoutubeData(str){
 			if(/(ft|feat|Feat|Ft)/gi.test(str)){
 				str = (str).replace(/ (ft|feat|Feat|Ft).*/i, '');
 			}
-			
-			var str_arr=[/\s+\(\s*(HD|HQ)\s*\)$/,/\s*\(\s*of+icial\s*\)/gi,/\s*(of+icial\s*)?(music\s*)?video/i,/\s*\(\s*[0-9]{4}\s*\)/i,/Official/gi,/video/gi,/full/gi,/song/gi,/exclusive/gi,/title/gi,/audio/gi,/latest/gi,/unplugged/gi,/bollywood/gi,/sing/gi,/along/gi,/remix/gi,/Original/gi,/lyrical/gi,/Lyrics/gi,/lyric/gi,/1080p/gi,/720p/gi,/from/gi,/with/gi];
+	
+			var str_arr=[/\s*\.(avi|wmv|mpg|mpeg|flv|mp4)$/i , /\s*\(\s*[0-9]{4}\s*\)/i, /\s+(HD|HQ)\s*$/ , /\s*\(\s*of+icial\s*\)/gi,/\s*(of+icial\s*)?(music\s*)?video/i , /\s*[0-9]{4}\s*/i , /Official/gi,/video/gi,/full/gi,/song/gi,/exclusive/gi,/title/gi,/audio/gi,/latest/gi,/unplugged/gi,/bollywood/gi,/sing/gi,/along/gi,/remix/gi,/Original/gi,/lyrical/gi,/Lyrics/gi,/lyric/gi,/1080p/gi,/720p/gi,/from/gi,/with/gi];
 			var i ,l = str_arr.length ;
 			for(i=0;i<l;i++){
 				str = (str).replace(str_arr[i], '');
