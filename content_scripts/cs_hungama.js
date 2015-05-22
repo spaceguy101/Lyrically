@@ -25,6 +25,6 @@ setInterval(function() {
 	if (Name !== prevName && Name) {
 		chrome.runtime.sendMessage( {'msg' : 'trackInfo','artist' : Artist1,'title' : Name,'album' : album,'imgsrc':ImgSrc});
 	}
-}, 3000);
+}, 2000);
 
 }

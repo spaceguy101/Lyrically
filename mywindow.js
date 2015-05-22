@@ -120,11 +120,12 @@ $('#imgart').show();
 spinner('show');
 if(!title_|| title_ == undefined || title_ =='noName' ){
 if(count < 3 ) { 
-	setTimeout(getBGdata,1000);
+	setTimeout(getBGdata,500);
 	count ++;
 } else{
 	count = 0;
 	$('.popup').prepend('<b class="err" style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>');
+	mainView.innerHTML = '<b> Cannot Get Song Title... </b></br><b style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>';
 	noName();
 }
 return;
@@ -183,7 +184,9 @@ chrome.runtime.onMessage.addListener(function(request, sender,
 	changeToDominantColor(request.imgsrc);
 
 	}
-
+	else if(request.msg == 'restartGetInfo'){
+		getBGdata();
+	}
 
 
 /*

@@ -3,7 +3,7 @@ var Name = '';
 var ImgSrc ='';
 
 window.addEventListener ("load", function (){
-	console.log('cs loadede');
+
 	interval();
 	chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
 		sendResponse({message: "fromCS"});
@@ -15,7 +15,7 @@ window.addEventListener ("load", function (){
 function interval(){
 setInterval(function() {
 	checkTrackChange();
-}, 3000);
+}, 2000);
 }
 
 
