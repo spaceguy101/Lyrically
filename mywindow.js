@@ -8,7 +8,7 @@ window.onload = function() {
 	title='';
 	album='';
 	imgsrc='';
-
+	count =0;
 	$('#popupdiv').innerHTML='';
 
     $('.scrollbar').css('height', $(window).height() - 50);
@@ -33,14 +33,14 @@ getBGdata();
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('svg').addEventListener('click', openPopup);
+    document.getElementById('svg').addEventListener('click', function(){openPopup() ; $('.err').remove();});
     document.getElementById('bttn').addEventListener('click', input);
 });
 
 
 
 function openPopup() {
-	$('.err').remove();
+	
    $('#test').toggle( 400,'swing');
 }
 
@@ -118,9 +118,15 @@ function getTrackInfoFromBG(title_,artist_,album_,site_,imgsrc_){
 $('.img-holder').show();
 $('#imgart').show();
 spinner('show');
-console.log(title_);
-if(!title_|| title_ == undefined){
-setTimeout(getBGdata,1000);
+if(!title_|| title_ == undefined || title_ =='noName' ){
+if(count < 3 ) { 
+	setTimeout(getBGdata,1000);
+	count ++;
+} else{
+	count = 0;
+	$('.popup').prepend('<b class="err" style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>');
+	noName();
+}
 return;
 }
 
@@ -140,6 +146,7 @@ return;
 	
 
 	}
+		count =0;
 		closePopup();
 	  $('#imgart').attr('src', imgsrc_);
 	  changeToDominantColor(imgsrc_);
@@ -240,7 +247,7 @@ function getLyrics(artist, title, album)
 	closePopup();
  
 	if (!title || title === 'noName' || title === '') {
-		noName();
+		setHeader('---','---');
 		getBGdata();
 		return; 
 	}
@@ -415,7 +422,7 @@ background.focusWindow();
 
 function noName(){
 		spinner('hide');
-		$('.popup').prepend('<b style="text-align: center;" class="err"> Cannot Get Song Title... </b></br>');
+		$('.popup').prepend('<b class="err" > Cannot Get Song Title... </b></br>');
 			setHeader('---','---');
 			openPopup();
 }

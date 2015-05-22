@@ -25,10 +25,10 @@ $.ajax({
 						if(ResultUrl.indexOf('lyrics.wikia') > -1){
 							url_lyricsWikia = ResultUrl;
 							getLyricsFromLyricWikiURL(url_lyricsWikia,title,'','gsearch');
-							console.log('wikia');
+							
 						}
 						else if(ResultUrl.indexOf('lyricsmasti') > -1){
-							console.log('masti');
+							
 						url_lyricsMasti = ResultUrl ;	
 						document.getElementById('main').innerHTML = '</p> Trying to get lyrics from URL : <a href="'
 								+ url_lyricsMasti + '" target="_blank">'
@@ -39,7 +39,7 @@ $.ajax({
 						}
 						else if(ResultUrl.indexOf('lyricsmint') > -1){
 							url_lyricsMint = ResultUrl ;
-							console.log('mint');
+							
 							document.getElementById('main').innerHTML = '</p> Trying to get lyrics from URL : <a href="'
 								+ url_lyricsMint + '" target="_blank">'
 									+ url_lyricsMint +

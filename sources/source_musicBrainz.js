@@ -54,7 +54,6 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 		query = 'recording:' + title2 + ' AND artist:'+ artist ;
 	}
 
-	console.log(query);
 	$
 			.ajax({
 				url : "http://musicbrainz.org/ws/2/recording",

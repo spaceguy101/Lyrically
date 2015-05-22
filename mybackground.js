@@ -41,8 +41,6 @@ function openPopup(tab)
 {
 	var prevTabID = currentTabID;
 	currentTabID = tab.id;
-	console.log('pre: '+prevTabID);
-	console.log('cur: '+currentTabID)
 	if(prevTabID !==currentTabID ){
 
 		getInfoFromCs(tab);
@@ -93,12 +91,7 @@ console.log('Nosong');
 
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
   // When we get a message from the content script
-	chrome.tabs.query(
-        {currentWindow: true, active: true},
-        function(tabArray) {
-            if (tabArray && tabArray[0])
-                console.log(tabArray[0].id);
-        });
+
 
   if(message.msg === 'trackInfo'){
     artist = message.artist;
@@ -149,7 +142,16 @@ if(popupActive === true) chrome.windows.remove(popupId, function(){});
 function getInfoFromCs(tab)
 {
 	
-		chrome.tabs.sendMessage(tab.id, {'message': "sendInfoToBG"}, function(response) {});
+    chrome.tabs.sendMessage(tab.id, {'message': "sendInfoToBG"}, function(response) {
+			if(response===undefined){
+				if(tab.url.indexOf('youtube.com/watch') > -1){
+				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_youtube.js"}, function() {
+				 	
+				 	chrome.tabs.sendMessage(tab.id, {'message': "sendInfoToBG"}, function(response) {});
+				 });
+			}
+			}
+		});
 		
 }
 
