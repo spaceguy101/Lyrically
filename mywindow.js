@@ -124,7 +124,7 @@ if(count < 3 ) {
 	count ++;
 } else{
 	count = 0;
-	$('.popup').prepend('<b class="err" style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>');
+	if($('#loadErr')[0]!==null /* To Invoke multiple times*/) $('.popup').prepend('<b class="err" id="loadErr" style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>');
 	mainView.innerHTML = '<b> Cannot Get Song Title... </b></br><b style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>';
 	noName();
 }
@@ -427,6 +427,6 @@ function noName(){
 		spinner('hide');
 		$('.popup').prepend('<b class="err" > Cannot Get Song Title... </b></br>');
 			setHeader('---','---');
-			openPopup();
+			 $('#test').show( 400,'swing'); //openPopup() //
 }
 

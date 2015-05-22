@@ -63,6 +63,11 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 				type : "GET",
 				cache: true,
 				error : function(jqXHR, textStatus, errorThrown) {
+					if(artist && album2== undefined || !album2) searchGoogle(artist +' '+title2);
+
+							else if(album2 && !artist) searchGoogle(title2 +' '+album2);
+
+								else if(!album2 && !artist) searchGoogle(title2);
 					console.log('Musicbrainz error');
 				},
 				success : function(data, status) {
