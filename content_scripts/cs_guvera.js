@@ -10,7 +10,13 @@ String.prototype.capitalize=function(all){
     } 
 };
 
-window.addEventListener ("load", interval , false);
+window.addEventListener ("load", function (){
+	interval();
+	chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
+    if (request.message == "sendInfoToBG")
+      chrome.runtime.sendMessage( {'msg' : 'trackInfo','artist' : Artist1,'title' : Name,'album' : album,'imgsrc':ImgSrc});
+  });
+} , false);
 
 function interval(){
 

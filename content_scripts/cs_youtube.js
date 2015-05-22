@@ -2,7 +2,15 @@
 var Name = '';
 var ImgSrc ='';
 
-window.addEventListener ("load", interval , false);
+window.addEventListener ("load", function (){
+	console.log('cs loadede');
+	interval();
+	chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
+		sendResponse({message: "fromCS"});
+    if (request.message == "sendInfoToBG")
+      chrome.runtime.sendMessage({'title' : Name,'msg' : 'youtube_data','imgsrc':ImgSrc});
+  });
+} , false);
 
 function interval(){
 setInterval(function() {
@@ -27,4 +35,3 @@ ImgSrc=$('.watch-main-col link[itemprop="thumbnailUrl"]').attr('href');
 		chrome.runtime.sendMessage({'title' : Name,'msg' : 'youtube_data','imgsrc':ImgSrc});
 	}
 }
-

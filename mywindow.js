@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function openPopup() {
-
+	$('.err').remove();
    $('#test').toggle( 400,'swing');
 }
 
@@ -118,9 +118,9 @@ function getTrackInfoFromBG(title_,artist_,album_,site_,imgsrc_){
 $('.img-holder').show();
 $('#imgart').show();
 spinner('show');
-
+console.log(title_);
 if(!title_|| title_ == undefined){
-setTimeout(getBGdata,2000);
+setTimeout(getBGdata,1000);
 return;
 }
 
@@ -140,7 +140,7 @@ return;
 	
 
 	}
-
+		closePopup();
 	  $('#imgart').attr('src', imgsrc_);
 	  changeToDominantColor(imgsrc_);
 
@@ -241,6 +241,7 @@ function getLyrics(artist, title, album)
  
 	if (!title || title === 'noName' || title === '') {
 		noName();
+		getBGdata();
 		return; 
 	}
 
@@ -414,8 +415,8 @@ background.focusWindow();
 
 function noName(){
 		spinner('hide');
-		mainView.innerHTML = 'Cannot Get Song Name... </br></br>You May Try Searching Manually';
+		$('.popup').prepend('<b style="text-align: center;" class="err"> Cannot Get Song Title... </b></br>');
 			setHeader('---','---');
-			setTimeout(openPopup, 3000);
+			openPopup();
 }
 
