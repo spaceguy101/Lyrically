@@ -124,7 +124,7 @@ if(count < 3 ) {
 	count ++;
 } else{
 	count = 0;
-	if($('#loadErr')[0]!==null /* To Invoke multiple times*/) $('.popup').prepend('<b class="err" id="loadErr" style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>');
+	if($('#loadErr')[0]!==null /* To avoid Invoke multiple times*/) $('.popup').prepend('<b class="err" id="loadErr" style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>');
 	mainView.innerHTML = '<b> Cannot Get Song Title... </b></br><b style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>';
 	noName();
 }
@@ -149,6 +149,7 @@ return;
 	}
 		count =0;
 		closePopup();
+		 $('.err').remove();
 	  $('#imgart').attr('src', imgsrc_);
 	  changeToDominantColor(imgsrc_);
 

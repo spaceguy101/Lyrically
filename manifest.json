@@ -2,8 +2,8 @@
 {
   "name": "Lyrically",
   "short_name": "Lyrically",
-  "version": "1.0.18",
-  "description": "Lyrics Of Songs On Youtube,Gaana,Saavn,Bopfm,Guvera etc. Hindi English",
+  "version": "1.0.19",
+  "description": "Get Lyrics Of Songs On Youtube, Gaana, Saavn, Bopfm, Guvera etc. Hindi English Lyrics",
    "author": "Shreyas" ,
   "background": {
       "scripts": [ "jquery-2.1.1.min.js", "mybackground.js" ]
@@ -26,8 +26,8 @@
       "run_at": "document_end"
    }, {
       "js": ["content_scripts/cs_youtube.js","jquery-2.1.1.min.js" ],
-     "matches": [ "https://www.youtube.com/watch*" ],
-      "run_at": "document_start"
+     "matches": [ "https://www.youtube.com/*" ],
+      "run_at": "document_end"
    }, {
       "js": ["content_scripts/cs_bopfm.js","jquery-2.1.1.min.js" ],
      "matches": [ "https://bop.fm/*" ],

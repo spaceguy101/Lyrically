@@ -48,7 +48,7 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 	}	
 
 	if(( !album2 || album2 == undefined) && (!artist || artist == undefined)) {
-		query = 'recording:' + title2 ;
+		query = 'recording:' + title2 +' AND country:IN';
 	}
 	if(artist !== '' && artist !== undefined){
 		query = 'recording:' + title2 + ' AND artist:'+ artist ;
@@ -89,7 +89,7 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 					else{
 						if(artist && album2== undefined || !album2) searchGoogle(artist +' '+title2);
 
-							else if(album2 && !artist) searchGoogle(title2 +' '+album2);
+							else if(album2 && (!artist || artist == undefined)) searchGoogle(title2 +' '+album2);
 
 								else if(!album2 && !artist) searchGoogle(title2);
 					}

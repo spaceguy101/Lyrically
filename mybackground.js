@@ -145,12 +145,7 @@ function getInfoFromCs(tab)
     chrome.tabs.sendMessage(tab.id, {'message': "sendInfoToBG"}, function(response) {
 			if(response===undefined){
 				artist = title =album =site=imgsrc= '';
-				if(tab.url.indexOf('youtube.com/watch') > -1){
-				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_youtube.js"}, function() {
 				 	chrome.runtime.sendMessage({'msg':'restartGetInfo'});
-				 	chrome.tabs.sendMessage(tab.id, {'message': "sendInfoToBG"}, function(response) {});
-				 });
-			 }
 			}
 		});
 		
