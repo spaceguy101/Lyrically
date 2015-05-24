@@ -1,4 +1,5 @@
-
+/*global $:false */
+'use strict';
 function google(title,artist){
  // Cureently No Implemented LyricsMINt.com
  //It is Redundant
@@ -8,8 +9,7 @@ $.ajax({
 			data: {v:'1.0',q: title + ' AND site:lyricsmasti.com OR site:lyrics.wikia.com'},
 			dataType: 'jsonp',
 			type: 'GET',
-			error: function(jqXHR, textStatus, errorThrown){
-					
+			error: function(){
 					fetchLetra (artist,title);
 			},
 			success: function(googledata){
@@ -23,27 +23,26 @@ $.ajax({
 					
 
 						if(ResultUrl.indexOf('lyrics.wikia') > -1){
-							url_lyricsWikia = ResultUrl;
+							var url_lyricsWikia = ResultUrl;
 							getLyricsFromLyricWikiURL(url_lyricsWikia,title,'','gsearch');
 							
 						}
 						else if(ResultUrl.indexOf('lyricsmasti') > -1){
 							
-						url_lyricsMasti = ResultUrl ;	
-						document.getElementById('main').innerHTML = '</p> Trying to get lyrics from URL : <a href="'
-								+ url_lyricsMasti + '" target="_blank">'
-									+ url_lyricsMasti +
-									' </a>';
+						var url_lyricsMasti = ResultUrl ;	
+						document.getElementById('main').innerHTML = '</p> Trying to get lyrics from URL : <a href="'+ 
+						url_lyricsMasti + '" target="_blank">'+ 
+						url_lyricsMasti + ' </a>';
+
 						getLyricsFromLyricMastiURL(url_lyricsMasti,title,artist)	;	
 
 						}
 						else if(ResultUrl.indexOf('lyricsmint') > -1){
-							url_lyricsMint = ResultUrl ;
+							var url_lyricsMint = ResultUrl ;
 							
-							document.getElementById('main').innerHTML = '</p> Trying to get lyrics from URL : <a href="'
-								+ url_lyricsMint + '" target="_blank">'
-									+ url_lyricsMint +
-									' </a>';
+							document.getElementById('main').innerHTML = '</p> Trying to get lyrics from URL : <a href="'+ 
+							url_lyricsMint + '" target="_blank">'+ 
+							url_lyricsMint +' </a>';
 							getLyricsFromLyricMintURL(url_lyricsMint,title,artist);
 
 						}

@@ -1,3 +1,5 @@
+/*global chrome:false*/
+'use strict';
 var artist = '';
 var title = '' ;
 var album ='';
@@ -9,16 +11,16 @@ var currentTabID='';
 
 chrome.tabs.onUpdated.addListener(function (tabId,Info, tab) {
 
- if (Info.status == 'loading') return;
- if ((tab.url.indexOf('saavn.com') > -1) && (Info.status == 'complete')
-	||(tab.url.indexOf('gaana.com') > -1) && (Info.status == 'complete')
-	||(tab.url.indexOf('rdio.com') > -1) && (Info.status == 'complete')
-	||(tab.url.indexOf('hungama.com') > -1) && (Info.status == 'complete')
-	||(tab.url.indexOf('youtube.com/watch') > -1) && (Info.status == 'complete')
-	||(tab.url.indexOf('guvera') > -1) && (Info.status == 'complete')
-	||(tab.url.indexOf('raaga') > -1) && (Info.status == 'complete')
-	||(tab.url.indexOf('spotify') > -1) && (Info.status == 'complete')
-	||(tab.url.indexOf('bop') > -1) && (Info.status == 'complete')) chrome.pageAction.show(tabId);
+ if (Info.status === 'loading') return;
+ if ((tab.url.indexOf('saavn.com') > -1)	||
+ 	(tab.url.indexOf('gaana.com') > -1) 	||
+ 	(tab.url.indexOf('rdio.com') > -1)		||
+ 	(tab.url.indexOf('hungama.com') > -1)	||
+ 	(tab.url.indexOf('youtube.com/watch')>-1)||
+ 	(tab.url.indexOf('guvera') > -1)		||
+ 	(tab.url.indexOf('raaga') > -1)			||
+ 	(tab.url.indexOf('spotify') > -1)		||
+ 	(tab.url.indexOf('bop') > -1) && (Info.status === 'complete')) chrome.pageAction.show(tabId);
 });
 
 /*
@@ -31,8 +33,7 @@ chrome.pageAction.onClicked.addListener(function (tab){
 
 	if(title !== 'noName' || title !== '' ) openPopup(tab); //open popup
 	else {
-		showNoSongPlaying();        /// Think on Avoiding this to execute on every setTimeout 
-		setTimeout(iconClicked,1000);
+		showNoSongPlaying();
 	}
 }); // How to open default browserAction popup or normal popup ??
 
@@ -48,6 +49,7 @@ function openPopup(tab)
 
 if(popupActive === false)
 {
+	var heightWithoutPanel;
 	if(navigator.platform.indexOf('Win') > -1 ) heightWithoutPanel = 495 ;
 		else heightWithoutPanel = 460;
 
@@ -80,16 +82,16 @@ if(popupActive === false)
 
 }
 
-else chrome.windows.update(popupId, { "focused": true });
+else chrome.windows.update(popupId, { 'focused': true });
 
 }
 
 
 function showNoSongPlaying(){
-console.log('Nosong');
+
 }
 
-chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
+chrome.runtime.onMessage.addListener(function(message){
   // When we get a message from the content script
 
 
@@ -124,15 +126,16 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 	}
 	*/
 });
+/*
 function showPanels() {
-chrome.tabs.create({url: "chrome://flags/#enable-panels"}, function(win){
-chrome.windows.update(popupId, { "focused": true });
+chrome.tabs.create({url: 'chrome://flags/#enable-panels'}, function(win){
+chrome.windows.update(popupId, { 'focused': true });
 });
 
-}
+}*/
 
 function focusWindow(){
-if(popupActive === true) chrome.windows.update(popupId, { "focused": true });
+if(popupActive === true) chrome.windows.update(popupId, { 'focused': true });
 }
 
 function closeWindow(){
@@ -142,7 +145,7 @@ if(popupActive === true) chrome.windows.remove(popupId, function(){});
 function getInfoFromCs(tab)
 {
 	
-    chrome.tabs.sendMessage(tab.id, {'message': "sendInfoToBG"}, function(response) {
+    chrome.tabs.sendMessage(tab.id, {'message': 'sendInfoToBG'}, function(response) {
 			if(response===undefined){
 				artist = title =album =site=imgsrc= '';
 				 	chrome.runtime.sendMessage({'msg':'restartGetInfo'});

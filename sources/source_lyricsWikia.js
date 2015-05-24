@@ -1,6 +1,8 @@
-
+/*global $:false , console:false*/
+'use strict';
 function getURLFromLyricWiki(artist, title) 
 {
+	if(artist === 'Not found') artist ='';
 	$
 			.ajax({
 				url : 'http://lyrics.wikia.com/api.php',
@@ -13,18 +15,18 @@ function getURLFromLyricWiki(artist, title)
 				dataType : 'xml',
 				type : 'GET',
 				cache : false,
-				error : function(jqXHR, textStatus, errorThrown) {
+				error : function() {
 
 					spinner('hide');
-					mainView.innerHTML = 'Sorry :( ....An error occurred while retrieving lyrics. ';
+					document.getElementById('main').innerHTML = 'Sorry :( ....An error occurred while retrieving lyrics. ';
 							
 				},
-				success : function(lyricsData, status) {
+				success : function(lyricsData) {
 					
 					
 						// Grab lyrics wikia song url
-						var songURL = $(lyricsData).find("url").text();
-						var lyrics = $(lyricsData).find("lyrics").text();
+						var songURL = $(lyricsData).find('url').text();
+						var lyrics = $(lyricsData).find('lyrics').text();
 
 						if (lyrics === 'Not found') {
 							
@@ -46,9 +48,9 @@ function getLyricsFromLyricWikiURL(songURL,title,artist,from) {
 			.ajax({
 				url : songURL,
 				type : 'GET',
-				success : function(songData, songStatus) {
+				success : function(songData) {
 					
-					lyrics = getLyricsFromRawHtml_wikia(songData);
+					var lyrics = getLyricsFromRawHtml_wikia(songData);
 					
 					
 					if (lyrics.length === 0  ) {
@@ -63,9 +65,9 @@ function getLyricsFromLyricWikiURL(songURL,title,artist,from) {
 
 						spinner('hide');
 						focusWindow();
-						$('#main').prop('style').removeProperty("white-space");
-						document.getElementById('main').innerHTML = lyrics + '</p> Source <a href="'
-								+ songURL + '" target="_blank">LyricWiki.  </a>';
+						$('#main').prop('style').removeProperty('white-space');
+						document.getElementById('main').innerHTML = lyrics + '</p> Source <a href="'+ songURL + 
+						'" target="_blank">LyricWiki.  </a>';
 			
 						$('.scrollbar').perfectScrollbar('update');
 					}

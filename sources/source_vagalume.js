@@ -1,4 +1,5 @@
-
+/*global $:false, jQuery:false ,console:false*/
+'use strict';
 function showLetra (data,art,mus,arrayid) {
 			
 			if (! arrayid) arrayid = 0;
@@ -6,11 +7,11 @@ function showLetra (data,art,mus,arrayid) {
 				
 				data.mus[arrayid].text = data.mus[arrayid].text.replace(/\r\n|\n|\r/gm, '<br />');
 				
-				lyrics= data.mus[arrayid].text;
+				var lyrics= data.mus[arrayid].text;
 				focusWindow();
-				document.getElementById('main').innerHTML=lyrics + '</p> Source <a href="'
-								+ data.mus[arrayid].url + '" target="_blank"> Vagalume.com </a>';
-						$('.scrollbar').perfectScrollbar('update');;
+				document.getElementById('main').innerHTML=lyrics + '</p> Source <a href="'+ 
+				data.mus[arrayid].url + '" target="_blank"> Vagalume.com </a>';
+						$('.scrollbar').perfectScrollbar('update');
 
 				// Show buttons to open original and portuguese translation
 				if (data.mus[arrayid].translate) {
@@ -47,13 +48,12 @@ function showLetra (data,art,mus,arrayid) {
 				openPopup();
 				// Song not found, but artist was found
 				// You can list all songs from Vagalume here
-				if(art == undefined) art = '' ;
+				if(art === undefined) art = '' ;
 				document.getElementById('artist').value=art;
    				document.getElementById('title').value=mus;
 				$('.popup').append(
-					'<div class="err" id= "popupdiv" style="text-align: center;"></br></br></br></br><b>You May Try:</b></br><ul>\
-		  					<li>(<a target="_blank" href="https://www.google.com/search?q='+ art+ ' '+ mus+ ' lyrics">Search Google</a>).</li>\
-		  					<br>'+ 
+					'<div class="err" id= "popupdiv" style="text-align: center;"></br></br></br></br><b>You May Try:</b></br><ul>'+
+		  					'<li>(<a target="_blank" href="https://www.google.com/search?q='+ art+ ' '+ mus+ ' lyrics">Search Google</a>).</li><br>'+ 
 							'<li>Contribute by adding lyrics at ' + '<a href="'+ 'http://lyrics.wikia.com/'+art+':'+mus+'?action=edit' + '" target="_blank">LyricWiki</a>. </li></ul></div> ');
 				
 			} 
@@ -68,9 +68,9 @@ function showLetra (data,art,mus,arrayid) {
 				showLetra(data, art, mus);
 				return true;
 			}
-			var url = "http://api.vagalume.com.br/search.php"
-				+"?art="+encodeURIComponent(art)
-				+"&mus="+encodeURIComponent(mus);
+			var url = 'http://api.vagalume.com.br/search.php'+
+			'?art='+encodeURIComponent(art)+
+			'&mus='+encodeURIComponent(mus);
 			// Check if browser supports CORS - http://www.w3.org/TR/cors/
 			jQuery.getJSON(url,function(data) {
 				// What we do with the data

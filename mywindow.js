@@ -1,14 +1,20 @@
-
+	/*global $:false , chrome:false*/
+	'use strict';
+	var artist='';
+	var title='';
+	var album='';
+	var imgsrc='';
+	var count =0;
+	var site ='';
+	var mainView;
+	var header;
+	var artist_name;
 window.onload = function() {
+
 	$('.scrollbar').perfectScrollbar();
 	mainView = document.getElementById('main');
 	header = document.getElementById('header');
 	artist_name=document.getElementById('artist_name');
-	artist='';
-	title='';
-	album='';
-	imgsrc='';
-	count =0;
 	$('#popupdiv').innerHTML='';
 
     $('.scrollbar').css('height', $(window).height() - 50);
@@ -118,7 +124,7 @@ function getTrackInfoFromBG(title_,artist_,album_,site_,imgsrc_){
 $('.img-holder').show();
 $('#imgart').show();
 spinner('show');
-if(!title_|| title_ == undefined || title_ =='noName' ){
+if(!title_|| title_ === undefined || title_ ==='noName' ){
 if(count < 3 ) { 
 	setTimeout(getBGdata,500);
 	count ++;
@@ -131,7 +137,7 @@ if(count < 3 ) {
 return;
 }
 
-	if (site_ == 'others'){
+	if (site_ === 'others'){
 	
 	
 	   getLyrics(artist_, title_, album_);
@@ -156,8 +162,7 @@ return;
 }
 
 
-chrome.runtime.onMessage.addListener(function(request, sender,
-		sendResponse) {
+chrome.runtime.onMessage.addListener(function(request) {
 
 	$('.img-holder').show();
 	$('#imgart').show();
@@ -304,7 +309,7 @@ function processYoutubeData(str){
 
 			if(/-/.test(str)){
 			
-			var Index = str.indexOf("-");
+			var Index = str.indexOf('-');
 			var _title = str.substring(0, Index);
 			var _album = str.substring(Index+1, str.length);
 			getDataFromMusicBrainz(_title,_album);
@@ -351,12 +356,12 @@ var img = new Image();
 
 img.onload=function(){
 
-var canvas=document.createElement("canvas");
+var canvas=document.createElement('canvas');
 canvas.height=img.height;
 canvas.width=img.width;
 
 
-var ctx=canvas.getContext("2d");
+var ctx=canvas.getContext('2d');
 
 ctx.drawImage(img,0,0);
 
@@ -383,7 +388,7 @@ r=Math.floor(r/count);
 g=Math.floor(g/count);
 b=Math.floor(b/count);
 
-document.getElementById("header-wrap").style.backgroundColor =  'rgb(' + r + ',' + g + ',' + b + ')';
+document.getElementById('header-wrap').style.backgroundColor =  'rgb(' + r + ',' + g + ',' + b + ')';
 $('.container').css('border-color','rgb(' + r + ',' + g + ',' + b + ')');
 }
 };
@@ -401,18 +406,18 @@ function spinner(opt){
 	switch(opt) {
 
 		case 'show':
-        $(".spinner_container").fadeIn(250);
+        $('.spinner_container').fadeIn(250);
 
         break;
 
     	case 'hide':
-         $(".spinner_container").fadeOut(250);
+         $('.spinner_container').fadeOut(250);
 
         break;
 
 
     default:
-        $(".spinner_container").hide();
+        $('.spinner_container').hide();
 
 	}
 

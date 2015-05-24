@@ -1,3 +1,6 @@
+/*global $:false , console:false*/
+'use strict';
+
 /*function getArtistFromMusicBrainz(title, album) {
 	var artist = '';
 	query = 'recording:"' + title + '" AND release:"' + album + '"';
@@ -34,7 +37,7 @@
 
 function getDataFromMusicBrainz(title2,album2,artist) {
 	closePopup();
-	if(title2) {title2=title2.trim() ; title2 = title2.replace(/^\s+|\s+$/g, ""); } 
+	if(title2) {title2=title2.trim() ; title2 = title2.replace(/\s{2,}/g,' '); /* remove 2 or more white space*/ } 
 	if(album2) album2=album2.trim() ;else album2 = '';
 	if(artist) artist=artist.trim() ;
 	
@@ -42,12 +45,14 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 		noName();
 		return; 
 	}
+
+	var query;
 	
 	if(album2 || album2 !== undefined){
 	query = 'recording:' + title2 + ' AND release:'+ album2 ;
 	}	
 
-	if(( !album2 || album2 == undefined) && (!artist || artist == undefined)) {
+	if(( !album2 || album2 === undefined) && (!artist || artist === undefined)) {
 		query = 'recording:' + title2 +' AND country:IN';
 	}
 	if(artist !== '' && artist !== undefined){
@@ -56,47 +61,47 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 
 	$
 			.ajax({
-				url : "http://musicbrainz.org/ws/2/recording",
+				url : 'http://musicbrainz.org/ws/2/recording',
 				data : {
 					query : query
 				},
-				type : "GET",
+				type : 'GET',
 				cache: true,
-				error : function(jqXHR, textStatus, errorThrown) {
-					if(artist && album2== undefined || !album2) searchGoogle(artist +' '+title2);
+				error : function() {
+					if(artist && album2 === undefined || !album2) searchGoogle(artist +' '+title2);
 
 							else if(album2 && !artist) searchGoogle(title2 +' '+album2);
 
 								else if(!album2 && !artist) searchGoogle(title2);
 					console.log('Musicbrainz error');
 				},
-				success : function(data, status) {
+				success : function(data) {
 				
 					
-					title_arr=$(data).find("title");
+					var title_arr=$(data).find('title');
 						
-					artistCredit = $(data).find("artist-credit");
+					var artistCredit = $(data).find('artist-credit');
 					if (artistCredit.length > 0 && title_arr.length >0) {
-						_artist= artistCredit[0].getElementsByTagName("artist")[0]
-								.getElementsByTagName("name")[0].textContent;
+						var _artist= artistCredit[0].getElementsByTagName('artist')[0].getElementsByTagName('name')[0].textContent;
 						
-					title=title_arr[0].textContent;			
+					var title=title_arr[0].textContent;			
 					title = (title).replace(/\s*\(.*?\)\s*/g, '');
 							
 					
 					if(title.length > title2.length - 2 && title.length < title2.length + 2)
-					getLyrics(_artist, title, album2);
-					else{
-						if(artist && album2== undefined || !album2) searchGoogle(artist +' '+title2);
+							(_artist)? getLyrics(_artist, title, album2) : getLyrics('Not found', title, album2) ;
 
-							else if(album2 && (!artist || artist == undefined)) searchGoogle(title2 +' '+album2);
+					else{
+						if(artist && album2 === undefined || !album2) searchGoogle(artist +' '+title2);
+
+							else if(album2 && (!artist || artist === undefined)) searchGoogle(title2 +' '+album2);
 
 								else if(!album2 && !artist) searchGoogle(title2);
 					}
 						
 					} else {
 						
-						if(artist && album2== undefined || !album2) searchGoogle(artist +' '+title2);
+						if(artist && album2 === undefined || !album2) searchGoogle(artist +' '+title2);
 
 							else if(album2 && !artist) searchGoogle(title2 +' '+album2);
 

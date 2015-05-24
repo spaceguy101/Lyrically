@@ -1,27 +1,28 @@
+/*global $:false */
+'use strict';
 function getLyricsFromLyricMastiURL(songURL,title,artist) {
 	$
 			.ajax({
 				url : songURL,
 				type : 'GET',
 
-				error: function(jqXHR, textStatus, errorThrown){
+				error: function(){
 				fetchLetra (artist,title);
-			
 			},
 
 				success : function(songData, songStatus) {
 					
-					lyrics = getLyricsFromRawHtml_masti(songData);
+					var lyrics = getLyricsFromRawHtml_masti(songData);
 					
 					if (lyrics.length === 0) {
 					fetchLetra (artist,title);
 										
 					} else {
-						$('#main').css("white-space", "pre-wrap");
+						$('#main').css('white-space', 'pre-wrap');
 						spinner('hide');
 						focusWindow();
-						document.getElementById('main').innerHTML = lyrics + '</p> Source <a href="'
-								+ songURL + '" target="_blank">LyricMasti.com  </a>';
+						document.getElementById('main').innerHTML = lyrics + '</p> Source <a href="'+ songURL + 
+						'" target="_blank">LyricMasti.com  </a>';
 						$('.scrollbar').perfectScrollbar('update');
 
 
