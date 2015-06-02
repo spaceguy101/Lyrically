@@ -21,27 +21,29 @@ window.onload = function() {
     $('.container').css('height', $(window).height());
 
 $(window).on('resize',function(){
+	$('#actionbar').css('width', $(window).width() - 105);
+	$('.spinner_container').css('height', $(window).height() - 50);
     $('.scrollbar').css('height', $(window).height() - 50);
     $('.container').css('height', $(window).height());
     $('.scrollbar').perfectScrollbar('update');
 });
 
 var background = chrome.extension.getBackgroundPage();
-addEventListener('unload', function (event) {
+addEventListener('unload', function () {
     background.popupActive= false;
 }, true);
 
+$('.place').keypress(function(e){
+      if(e.keyCode==13)
+      $('#bttn').click();		
+    });
+	 
+    document.getElementById('svg').addEventListener('click', function(){openPopup() ; $('.err').remove();});
+    document.getElementById('bttn').addEventListener('click', input);
 
 getBGdata();
 
 };
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('svg').addEventListener('click', function(){openPopup() ; $('.err').remove();});
-    document.getElementById('bttn').addEventListener('click', input);
-});
 
 
 
@@ -336,7 +338,7 @@ function processYoutubeData(str){
 			var Index = str.indexOf('-');
 			var _artist = str.substring(0, Index);
 			var _title = str.substring(Index+1, str.length);
-			getDataFromMusicBrainz(_title,'',_artist);   // getDataFromMusicBrainz_forYoutube(title2,album2,artist);
+			getLyrics(_artist, _title , '');   // getDataFromMusicBrainz_forYoutube(title2,album2,artist);
 			}
 			
 			
