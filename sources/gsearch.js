@@ -1,8 +1,13 @@
 /*global $:false */
 'use strict';
 function google(title,artist){
- // Cureently No Implemented LyricsMINt.com
- //It is Redundant
+ // Cureently No Implemented LyricsMINt.com //It is Redundant
+if(!(/\S/).test(title)){
+title = artist + title;
+console.log(title);
+}
+
+
 $.ajax({
 
 			url: 'https://ajax.googleapis.com/ajax/services/search/web',

@@ -1,3 +1,4 @@
+
 /*global $:false , console:false*/
 'use strict';
 function getURLFromLyricWiki(artist, title) 
@@ -35,7 +36,7 @@ function getURLFromLyricWiki(artist, title)
 							
 						}
 						else
-							getLyricsFromLyricWikiURL(songURL,title,artist);
+							getLyricsFromLyricWikiURL(songURL,title,artist,'');
 					
 
 				}
