@@ -19,6 +19,7 @@ window.onload = function() {
 
     $('.scrollbar').css('height', $(window).height() - 50);
     $('.container').css('height', $(window).height());
+    $('#actionbar').css('width', $(window).width() - 97);
 
 $(window).on('resize',function(){
 	$('#actionbar').css('width', $(window).width() - 105);
@@ -38,11 +39,7 @@ $('.place').keypress(function(e){
       $('#bttn').click();		
     });
 	 
-<<<<<<< HEAD
     document.getElementById('circle').addEventListener('click', function(){openPopup() ; $('.err').remove();});
-=======
-    document.getElementById('svg').addEventListener('click', function(){openPopup() ; $('.err').remove();});
->>>>>>> origin/master
     document.getElementById('bttn').addEventListener('click', input);
 
 getBGdata();
@@ -341,11 +338,7 @@ function processYoutubeData(str){
 			var Index = str.indexOf('-');
 			var _artist = str.substring(0, Index);
 			var _title = str.substring(Index+1, str.length);
-<<<<<<< HEAD
 			getLyrics( _artist, _title , '');   // getDataFromMusicBrainz_forYoutube(title2,album2,artist);
-=======
-			getLyrics(_artist, _title , '');   // getDataFromMusicBrainz_forYoutube(title2,album2,artist);
->>>>>>> origin/master
 			}
 			
 			
