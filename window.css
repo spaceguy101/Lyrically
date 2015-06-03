@@ -111,10 +111,17 @@ right:0px;
 }
 
 #circle{
+<<<<<<< HEAD
     margin-right: 10px;
     margin-top: 10px;
     display: inline-flex;
     cursor: pointer;
+=======
+      margin-right: 10px;
+  margin-top: 10px;
+    display: inline-flex;
+cursor: pointer;
+>>>>>>> origin/master
     top:0px;
     right:0px;
     position: fixed;
@@ -152,6 +159,12 @@ color :white;
   text-transform: uppercase;
 }
 
+<<<<<<< HEAD
+=======
+#svg1:hover {
+    opacity:0.6;
+} 
+>>>>>>> origin/master
 #circle:hover{
 opacity:0.6;
 }
