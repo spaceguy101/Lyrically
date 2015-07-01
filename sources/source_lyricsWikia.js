@@ -60,7 +60,7 @@ function getLyricsFromLyricWikiURL(songURL,title,artist,from) {
 						google(title,artist);
 						console.log('nothere');
 					}else{
-						fetchLetra (artist,title);
+						showErr (artist,title);
 					}
 					} else {
 

@@ -64,7 +64,7 @@ $.ajax({
 
 				error: function(jqXHR, textStatus, errorThrown){
 					spinner('hide');
-				fetchLetra (artist,title);
+				showErr (artist,title);
 					
 
 			},
@@ -75,7 +75,7 @@ $.ajax({
 					
 					if (lyrics.length === 0) {
 
-						fetchLetra (artist,title);
+						showErr (artist,title);
 						spinner('hide');
 						
 					document.getElementById('main').innerHTML= 'Sorry.. :( </br> <b>Lyrics not found...</b>' +  '</br></br> <b>You May Try To:</b></br> <ul>\

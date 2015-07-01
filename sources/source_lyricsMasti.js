@@ -7,7 +7,7 @@ function getLyricsFromLyricMastiURL(songURL,title,artist) {
 				type : 'GET',
 
 				error: function(){
-				fetchLetra (artist,title);
+				showErr (artist,title);
 			},
 
 				success : function(songData, songStatus) {
@@ -15,7 +15,8 @@ function getLyricsFromLyricMastiURL(songURL,title,artist) {
 					var lyrics = getLyricsFromRawHtml_masti(songData);
 					
 					if (lyrics.length === 0) {
-					fetchLetra (artist,title);
+
+					showErr (artist,title);
 										
 					} else {
 						$('#main').css('white-space', 'pre-wrap');
@@ -36,20 +37,28 @@ function getLyricsFromLyricMastiURL(songURL,title,artist) {
 
 
 
-function getLyricsFromRawHtml_masti(data) 
-{
+function getLyricsFromRawHtml_masti(data) {
 
-if($(data).find('#lyrics') !== null )
-return $('<div>').append($(data).find('#lyrics').find('code')[0].innerHTML).html();
 
-else {
+try{
 
-var filter = function() {
-					return this.nodeType === Node.TEXT_NODE|| $(this).is(' br, i, b, strong, em');
+		if($(data).find('#lyrics') !== null )
+			return $('<div>').append($(data).find('#lyrics').find('code')[0].innerHTML).html();
+
+		else if($('#lcontent1')){
+
+			var filter = function() {
+				return this.nodeType === Node.TEXT_NODE|| $(this).is(' br, i, b, strong, em');
 			};
 	
-	return $('<div>').append(
-			$(data).find('#lcontent1').contents().filter(filter)).remove().html();
+		return $('<div>').append($(data).find('#lcontent1').contents().filter(filter)).remove().html();
+		}
+
+		else return '';
+
+}catch(e){
+
+	return '';
 }
 
 }

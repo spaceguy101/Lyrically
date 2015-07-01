@@ -54,27 +54,8 @@ if(popupActive === false)
 		else heightWithoutPanel = 460;
 
 		chrome.windows.create({'url': 'mywindow.html', 'type': 'panel','width': 350,
-'height': heightWithoutPanel /* for panels , 495*/, 'left': screen.width - 350,'top': screen.height - heightWithoutPanel},function (popup) {
+'height': heightWithoutPanel, 'left': screen.width - 350,'top': screen.height - heightWithoutPanel},function (popup) {
       popupId = popup.id;
-
-      /*var isPanelEnabled = true ;
-      		  
-      		isPanelEnabled = popup.alwaysOnTop;  //Currently not including Panel show guide ,it will add many redundancy ,fix it later;
-      
-
-
-    	if(localStorage["dontShowGuide"] === 'false'){
-      		var dontShowGuide = false;
-      	}
-      	else var dontShowGuide = true ;
-		
-      	 if (!isPanelEnabled) chrome.windows.update(popupId, { "focused": true ,'height': heightWithoutPanel}); //Change height here
-
-            if (!isPanelEnabled && !dontShowGuide) {
-            	chrome.windows.update(popupId, { "focused": true });
-            chrome.runtime.sendMessage({'msg':'show_panel_enable_guide'}, function(response){
-        	});
-        }*/
    
 			popupActive= true;
 	
@@ -92,7 +73,7 @@ function showNoSongPlaying(){
 }
 
 chrome.runtime.onMessage.addListener(function(message){
-  // When we get a message from the content script
+
 
 
   if(message.msg === 'trackInfo'){
@@ -119,20 +100,9 @@ chrome.runtime.onMessage.addListener(function(message){
 			
 	}
 	
-	//from window
-	/*
-	if(message.msg === 'getTrackInfo'){
-          sendResponse({'artist':artist ,'title':title,'album':album,'site':site,'imgsrc':imgsrc});
-	}
-	*/
-});
-/*
-function showPanels() {
-chrome.tabs.create({url: 'chrome://flags/#enable-panels'}, function(win){
-chrome.windows.update(popupId, { 'focused': true });
+	
 });
 
-}*/
 
 function focusWindow(){
 if(popupActive === true) chrome.windows.update(popupId, { 'focused': true });
@@ -154,45 +124,3 @@ function getInfoFromCs(tab)
 		
 }
 
-/*
-function getInfoFromCs(tab)
-{
-	console.log(tab.id);
-		chrome.tabs.sendMessage(tab.id, {'message': "sendInfoToBG"}, function(response) {
-		
-		if(response=== undefined){ // if Failed to reach Content Script, Re-execute Script
-			console.log(response);
-			if(tab.url.indexOf('youtube.com/watch') > -1){
-				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_youtube.js"}, function() {});
-			}
-			else if(tab.url.indexOf('gaana.com') > -1){
-				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_gaana.js"}, function() {});
-			}
-			else if(tab.url.indexOf('saavn.com') > -1){
-				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_saavn.js"}, function() {});
-			}
-			else if(tab.url.indexOf('hungama.com')> -1){
-				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_hungama.js"}, function() {});
-			}
-			else if(tab.url.indexOf('bop') > -1){
-				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_bopfm.js"}, function() {});
-			}
-			else if(tab.url.indexOf('rdio') > -1){
-				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_rdio.js"}, function() {});
-			}
-			else if(tab.url.indexOf('guvera') > -1){
-				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_guvera.js"}, function() {});
-			}
-			else if(tab.url.indexOf('raaga') > -1){
-				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_raaga.js"}, function() {});
-			}
-			else if(tab.url.indexOf('spotify') > -1){
-				 chrome.tabs.executeScript(tab.id, {file: "content_scripts/cs_spotify.js"}, function() {});
-			}
-
-			setTimeout(function(){
-				chrome.tabs.sendMessage(tab.id, {'message': "sendInfoToBG"}, function(response) {},1000 )});
-	}});
-		
-
-}*/

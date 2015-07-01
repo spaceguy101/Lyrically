@@ -30,6 +30,7 @@ $(window).on('resize',function(){
 });
 
 var background = chrome.extension.getBackgroundPage();
+
 addEventListener('unload', function () {
     background.popupActive= false;
 }, true);
@@ -37,7 +38,7 @@ addEventListener('unload', function () {
 $('.place').keypress(function(e){
       if(e.keyCode==13)
       $('#bttn').click();		
-    });
+});
 	 
     document.getElementById('circle').addEventListener('click', function(){openPopup() ; $('.err').remove();});
     document.getElementById('bttn').addEventListener('click', input);
@@ -76,38 +77,6 @@ getDataFromMusicBrainz(title,'',artist);
 }
 	
 
-/*
-
-chrome.runtime.sendMessage({'msg':'getTrackInfo'},function(request){
-
-//a = true ;
-$('.img-holder').show();
-$('#imgart').show();
-spinner('show');
-	
-	if (request.site == 'others'){
-	
-	
-	   getLyrics(request.artist, request.title, request.album);
-	 
-	  }
-	  
-	  
-    else if(request.site == 'youtube'){
-	
-	
-	header.innerHTML = '' ;
-	processYoutubeData(request.title);
-	
-
-	}
-
-	  $('#imgart').attr('src', request.imgsrc);
-	  changeToDominantColor(request.imgsrc);
-
-	
-});
-*/
 function getBGdata(){	
 chrome.runtime.getBackgroundPage(function(background){
 
@@ -141,7 +110,6 @@ return;
 }
 
 	if (site_ === 'others'){
-	
 	
 	   getLyrics(artist_, title_, album_);
 	 
@@ -198,45 +166,6 @@ chrome.runtime.onMessage.addListener(function(request) {
 	}
 
 
-/*
-	if (request.msg == "show_panel_enable_guide"){
-		
-		a = false; 
-		spinner('hide');
-		$("#skip_step").click(function(){
-			$('.imp_container').hide();
-		});
-
-		$("#myChk").click(function(){
-
-		if(document.getElementById("myChk").checked)
-			localStorage["dontShowGuide"] = true ;
-		else if(!document.getElementById("myChk").checked) 
-			localStorage["dontShowGuide"] = false ;
-
-		});
-		
-		$('.imp_container').show();
-		$('#imp').show();
-		$('#guide').hide();
-		 
-		var background = chrome.extension.getBackgroundPage();
-
-		$("#flags_tab_link").click(function() {
-			$('#imp').hide();
-			$('#guide').show();
-        background.showPanels();
-
-    });
-		
-	}
-
-	if (a) {
-		$('.imp_container').hide();
-		
-	}
-	else if (!a) $('.imp_container').show();
-*/
 
 
 });
@@ -287,7 +216,7 @@ function processYoutubeData(str){
 	
 	str = str.replace(/ (Feat|ft|feat|Ft).*?\-/i, ' -');
 
-	//CLEANING title...
+
 			if(/(ft|feat|Feat|Ft)/gi.test(str)){
 				str = (str).replace(/ (ft|feat|Feat|Ft).*/i, '');
 			}
@@ -428,8 +357,7 @@ function spinner(opt){
 
 function focusWindow(){
 	changeToDominantColor($('#imgart').attr('src'));
-var background = chrome.extension.getBackgroundPage();
-background.focusWindow();
+chrome.extension.getBackgroundPage().focusWindow();
 }
 
 function noName(){
