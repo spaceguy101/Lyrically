@@ -52,7 +52,7 @@ display:block;
 width:100%;
 box-shadow: 0 0 2px rgba(0, 0, 0, 0.14), 2px 2px 4px rgba(0, 0, 0, 0.28);
 background-color:#4285f4;
-transition: background-color 4.5s ease;
+transition: background-color 8s ease;
 }
 
 #actionbar {

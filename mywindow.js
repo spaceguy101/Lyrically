@@ -19,7 +19,7 @@ window.onload = function() {
 
     $('.scrollbar').css('height', $(window).height() - 50);
     $('.container').css('height', $(window).height());
-    $('#actionbar').css('width', $(window).width() - 97);
+    $('#actionbar').css('width', $(window).width() - 95);
 
 $(window).on('resize',function(){
 	$('#actionbar').css('width', $(window).width() - 105);
@@ -133,7 +133,7 @@ if(count < 3 ) {
 	count ++;
 } else{
 	count = 0;
-	if($('#loadErr')[0]!==null /* To avoid Invoke multiple times*/) $('.popup').prepend('<b class="err" id="loadErr" style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>');
+	if($('#loadErr')[0]===null || $('#loadErr')[0]=== undefined /* To avoid Invoke multiple times*/) $('.popup').prepend('<b class="err" id="loadErr" style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>');
 	mainView.innerHTML = '<b> Cannot Get Song Title... </b></br><b style="color:red;font-size:30px;" > Plz Try Reloading Your Page... </b> </br></br>';
 	noName();
 }
@@ -160,7 +160,7 @@ return;
 		closePopup();
 		 $('.err').remove();
 	  $('#imgart').attr('src', imgsrc_);
-	  changeToDominantColor(imgsrc_);
+	  
 
 }
 
@@ -190,7 +190,7 @@ chrome.runtime.onMessage.addListener(function(request) {
 	}
 	
 	$('#imgart').attr('src', request.imgsrc);
-	changeToDominantColor(request.imgsrc);
+	
 
 	}
 	else if(request.msg == 'restartGetInfo'){
@@ -248,7 +248,7 @@ function setHeader(artist, title)
 	if (title){
 		header.innerHTML = title;
 		artist_name.innerHTML=artist;
-		//$('#artist_name').css('display', 'block');
+		$('#artist_name').css('display', 'block');
 	}
 }
 
@@ -427,6 +427,7 @@ function spinner(opt){
 
 
 function focusWindow(){
+	changeToDominantColor($('#imgart').attr('src'));
 var background = chrome.extension.getBackgroundPage();
 background.focusWindow();
 }

@@ -24,7 +24,7 @@ function getLyricsFromLyricMastiURL(songURL,title,artist) {
 						document.getElementById('main').innerHTML = lyrics + '</p> Source <a href="'+ songURL + 
 						'" target="_blank">LyricMasti.com  </a>';
 						$('.scrollbar').perfectScrollbar('update');
-
+						$('.scrollbar').animate({scrollTop:0},0.25);
 
 						
 					}

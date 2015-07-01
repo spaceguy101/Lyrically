@@ -71,6 +71,7 @@ function getLyricsFromLyricWikiURL(songURL,title,artist,from) {
 						'" target="_blank">LyricWiki.  </a>';
 			
 						$('.scrollbar').perfectScrollbar('update');
+						$('.scrollbar').animate({scrollTop:0},0.25);
 					}
 					
 				}
