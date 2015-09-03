@@ -12,13 +12,21 @@ Chrome Extension For Lyrics
  * *bop.fm*
  * *Guvera*
  * *Raaga*
- * *Grooveshark* [RIP]
+ * *Grooveshark [RIP]* 
  * *Spotify*
- 
- #####Current Lyrics Sources : 
+
+## Screenies :
+### #1
+![Screenie](https://raw.githubusercontent.com/singham007/Lyrically/master/Screenshots/Capture3.PNG) 
+### #2
+![Screenie](https://raw.githubusercontent.com/singham007/Lyrically/master/Screenshots/Capture.PNG) 
+### #3
+![Screenie](https://raw.githubusercontent.com/singham007/Lyrically/master/Screenshots/Capture2.PNG) 
+
+
+##### Lyrics Sources : 
  * http://lyrics.wikia.com
  * www.lyricsmasti.com
- * http://www.vagalume.com.br/
   
- #####For Artist Identification :
+ ##### Other API Sources :
  * https://musicbrainz.org/
