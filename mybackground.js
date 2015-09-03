@@ -23,29 +23,20 @@ chrome.tabs.onUpdated.addListener(function (tabId,Info, tab) {
  	(tab.url.indexOf('bop') > -1) && (Info.status === 'complete')) chrome.pageAction.show(tabId);
 });
 
-/*
-chrome.runtime.onInstalled.addListener(function(){
-localStorage["dontShowGuide"] = false ;
-});
-*/
+
 
 chrome.pageAction.onClicked.addListener(function (tab){
 
-	if(title !== 'noName' || title !== '' ) openPopup(tab); //open popup
-	else {
-		showNoSongPlaying();
-	}
-}); // How to open default browserAction popup or normal popup ??
+	if(title !== 'noName' || title !== '' ) openPopup(tab); 
+	return;
+}); 
 
 
-function openPopup(tab)
-{
+function openPopup(tab){
 	var prevTabID = currentTabID;
 	currentTabID = tab.id;
-	if(prevTabID !==currentTabID ){
-
-		getInfoFromCs(tab);
-	}
+	if(prevTabID !==currentTabID ) getInfoFromCs(tab);
+	
 
 if(popupActive === false)
 {
@@ -68,13 +59,8 @@ else chrome.windows.update(popupId, { 'focused': true });
 }
 
 
-function showNoSongPlaying(){
-
-}
 
 chrome.runtime.onMessage.addListener(function(message){
-
-
 
   if(message.msg === 'trackInfo'){
     artist = message.artist;
@@ -94,9 +80,6 @@ chrome.runtime.onMessage.addListener(function(message){
         	title=message.title;
 		    site='youtube';
 			chrome.runtime.sendMessage({'msg':'change','title':title,'site':site,'imgsrc':imgsrc});
-			
-			
-			
 			
 	}
 	

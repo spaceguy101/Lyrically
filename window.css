@@ -100,65 +100,36 @@ height:50px;
 #search{
 
 	fill:white;
-	margin-left: auto;
-    margin-right: auto;
 position: fixed;
-
-width:50px;
-height:50px;
+    margin-right: 5px;
+    margin-top: 3px;
+width:40px;
+height:40px;
 top:0px;
 right:0px;
 }
 
 #circle{
-    margin-right: 2px;
-    margin-top: 10px;
+    background: #FFF; 
+      margin-right: 3px;
+    margin-top: 3px;
     display: inline-flex;
     cursor: pointer;
     top:0px;
     right:0px;
     position: fixed;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    border-radius: 40px;
-    width:30px;
-    height:30px;
-    border-style:solid;
-    border-width:2px;
-    border-color:white;
+    border-radius: 50%;
+    width:42px;
+    height:42px;
+    border-style: solid;
+    border-color: #4285f4;
+    border-width: 2px;
 
 }
 
-#svg{
-display: inline-flex;
-cursor: pointer;
-  margin-left: 21px;
-  margin-top: 13px;
-}
 
-.searchText {
 
-position: fixed;
-top:45px;
-right:0px;
-background-color: black;
-color :white;
 
-    border: 1px solid #ccc;
-  display: none;
-  font-size: 10px;
-  margin-top: 12px;
-  padding: 5px;
-  text-transform: uppercase;
-}
-
-#circle:hover{
-opacity:0.6;
-}
-
-#svg:hover  .searchText {
-  display:block;
-}
 
 
 #frame
@@ -260,7 +231,7 @@ margin: 0 auto;
     right:0px;  
     margin:auto;
     width:100%;
-    height:408px;
+    height:250px;
     padding:10px;
     background-color:rgb(255,255,255);
     z-index:100000000000000000;
@@ -354,94 +325,3 @@ input 				{
   cursor: auto;
 }
 
-
-
-
-/**
- * Tooltips!
- */
-
-/* Base styles for the element that has a tooltip */
-[data-tooltip],
-.tooltip {
-  position: fixed;
-  cursor: pointer;
-}
-
-/* Base styles for the entire tooltip */
-[data-tooltip]:before,
-[data-tooltip]:after,
-.tooltip:before,
-.tooltip:after {
-  position: absolute;
-  visibility: hidden;
-
-  opacity: 0;
-  -webkit-transition: 
-      opacity 0.2s ease-in-out,
-        visibility 0.2s ease-in-out,
-        -webkit-transform 0.1s cubic-bezier(0.71, 1.7, 0.77, 1.24);
-  -webkit-transform: translate3d(0, 0, 0);
-  pointer-events: none;
-}
-
-/* Show the entire tooltip on hover and focus */
-[data-tooltip]:hover:before,
-[data-tooltip]:hover:after,
-[data-tooltip]:focus:before,
-[data-tooltip]:focus:after,
-.tooltip:hover:before,
-.tooltip:hover:after,
-.tooltip:focus:before,
-.tooltip:focus:after {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Base styles for the tooltip's directional arrow */
-.tooltip:before,
-[data-tooltip]:before {
-  z-index: 1001;
-  border: 6px solid transparent;
-  background: transparent;
-  content: "";
-}
-
-/* Base styles for the tooltip's content area */
-.tooltip:after,
-[data-tooltip]:after {
-  z-index: 1000;
-  padding: 8px;
-  width: 160px;
-  background-color: #000;
-  background-color: hsla(0, 0%, 20%, 1);
-  color: #fff;
-  content: attr(data-tooltip);
-  font-size: 14px;
-  line-height: 1.2;
-  margin-left: -90px;
-}
-
-
-.tooltip-bottom:before,
-.tooltip-bottom:after {
-  top: 100%;
-  bottom: auto;
-  left: 50%;
-}
-
-.tooltip-bottom:before {
-  margin-top: -12px;
-  margin-bottom: 0;
-  border-top-color: transparent;
-  border-bottom-color: #000;
-  border-bottom-color: hsla(0, 0%, 20%, 1);
-}
-
-.tooltip-bottom:hover:before,
-.tooltip-bottom:hover:after,
-.tooltip-bottom:focus:before,
-.tooltip-bottom:focus:after {
-  -webkit-transform: translateY(2px);
-  -webkit-transform: translateX(0px);
-}

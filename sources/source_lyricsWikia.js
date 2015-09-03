@@ -15,7 +15,7 @@ function getURLFromLyricWiki(artist, title)
 				
 				dataType : 'xml',
 				type : 'GET',
-				cache : false,
+				cache : true,
 				error : function() {
 
 					spinner('hide');
@@ -80,11 +80,8 @@ function getLyricsFromLyricWikiURL(songURL,title,artist,from) {
 
 function getLyricsFromRawHtml_wikia(data) 
 {
-
 	
-	
-	var filter = function() 
-	{
+	var filter = function(){
 		return this.nodeType === Node.TEXT_NODE|| $(this).is('p, br, i, b, strong, em');
 	};
 	return $('<div>').append(
