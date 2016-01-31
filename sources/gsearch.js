@@ -55,14 +55,12 @@ $.ajax({
 
 
 				}
-				else {
-					
-				showErr (artist,title);	
+				else {	
+					showErr (artist,title);	
 				}
 
 			}catch(err){
-				
-			showErr (artist,title);
+				showErr (artist,title);
 			}
 							
 				

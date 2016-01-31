@@ -14,13 +14,11 @@ chrome.tabs.onUpdated.addListener(function (tabId,Info, tab) {
  if (Info.status === 'loading') return;
  if ((tab.url.indexOf('saavn.com') > -1)	||
  	(tab.url.indexOf('gaana.com') > -1) 	||
- 	(tab.url.indexOf('rdio.com') > -1)		||
  	(tab.url.indexOf('hungama.com') > -1)	||
  	(tab.url.indexOf('youtube.com/watch')>-1)||
  	(tab.url.indexOf('guvera') > -1)		||
  	(tab.url.indexOf('raaga') > -1)			||
- 	(tab.url.indexOf('spotify') > -1)		||
- 	(tab.url.indexOf('bop') > -1) && (Info.status === 'complete')) chrome.pageAction.show(tabId);
+ 	(tab.url.indexOf('spotify') > -1)		&& (Info.status === 'complete')) chrome.pageAction.show(tabId);
 });
 
 
@@ -38,17 +36,12 @@ function openPopup(tab){
 	if(prevTabID !==currentTabID ) getInfoFromCs(tab);
 	
 
-if(popupActive === false)
-{
-	var heightWithoutPanel;
-	if(navigator.platform.indexOf('Win') > -1 ) heightWithoutPanel = 495 ;
-		else heightWithoutPanel = 460;
+if(popupActive === false){
 
-		chrome.windows.create({'url': 'mywindow.html', 'type': 'panel','width': 350,
-'height': heightWithoutPanel, 'left': screen.width - 350,'top': screen.height - heightWithoutPanel},function (popup) {
-      popupId = popup.id;
-   
-			popupActive= true;
+chrome.windows.create({'url': 'mywindow.html', 'type': 'panel','width': 350,
+'height': 495, 'left': screen.width - 350,'top': screen.height - 495},function (popup) {
+    popupId = popup.id;
+   	popupActive= true;
 	
 	});
 
@@ -74,8 +67,7 @@ chrome.runtime.onMessage.addListener(function(message){
 	
 	//for youtube..
 	else if(message.msg === 'youtube_data'){
-	 
-			
+	
 			imgsrc=message.imgsrc.replace(/maxresdefault/g,'default');
         	title=message.title;
 		    site='youtube';
@@ -88,11 +80,11 @@ chrome.runtime.onMessage.addListener(function(message){
 
 
 function focusWindow(){
-if(popupActive === true) chrome.windows.update(popupId, { 'focused': true });
+if(popupActive ) chrome.windows.update(popupId, { 'focused': true });
 }
 
 function closeWindow(){
-if(popupActive === true) chrome.windows.remove(popupId, function(){});
+if(popupActive ) chrome.windows.remove(popupId, function(){});
 }
 
 function getInfoFromCs(tab)

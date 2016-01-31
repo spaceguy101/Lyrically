@@ -17,20 +17,12 @@
      "matches": [ "http://www.saavn.com/*" ],
       "run_at": "document_end"
    }, {
-      "js": ["content_scripts/cs_rdio.js","jquery-2.1.1.min.js" ],
-     "matches": [ "http://www.rdio.com/*" ],
-      "run_at": "document_end"
-   }, {
       "js": [ "content_scripts/cs_hungama.js","jquery-2.1.1.min.js" ],
      "matches": [ "http://www.hungama.com/*" ],
       "run_at": "document_end"
    }, {
       "js": ["content_scripts/cs_youtube.js","jquery-2.1.1.min.js" ],
      "matches": [ "https://www.youtube.com/*" ],
-      "run_at": "document_end"
-   }, {
-      "js": ["content_scripts/cs_bopfm.js","jquery-2.1.1.min.js" ],
-     "matches": [ "https://bop.fm/*" ],
       "run_at": "document_end"
    }, {
       "js": [ "content_scripts/cs_guvera.js","jquery-2.1.1.min.js" ],

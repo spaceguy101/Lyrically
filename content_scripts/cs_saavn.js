@@ -14,17 +14,17 @@ function interval(){
 
 setInterval(function() {
 	var prevName = Name;
-	fetchTrackInfo();
-	if (Name !== prevName && (Name !=='' || Name !== undefined)) {
-		console.log(Name);
-		chrome.runtime.sendMessage( {'msg' : 'trackInfo','artist' : Artist1,'title' : Name,'album' : album,'imgsrc':ImgSrc});
-	}
+	fetchTrackInfo(function(){
+		if (Name !== prevName && (Name !=='' || Name !== undefined)) {
+			chrome.runtime.sendMessage( {'msg' : 'trackInfo','artist' : Artist1,'title' : Name,'album' : album,'imgsrc':ImgSrc});
+		}
+	});
 }, 2000);
 }
 
 
 //saavn.com
-function fetchTrackInfo() {
+function fetchTrackInfo(callback) {
 	Name = album = Artist1 = ImgSrc = '';
 if(document.getElementById('player-track-name') !== null){
 	Name = document.getElementById('player-track-name').innerText;
@@ -44,9 +44,8 @@ else{
 		}
 	}
 	
-	ImgSrc = $('#now-playing').find('.key-art').css('background-image');
-	if(ImgSrc !== undefined)
-	ImgSrc=ImgSrc.replace('url(','').replace(')','');
-	
+	ImgSrc = $('#now-playing').find('.key-art').css('background-image').replace('url('+'"','').replace('"'+')','');
+
+	callback();
 	
 }

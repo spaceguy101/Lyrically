@@ -23,10 +23,9 @@ function checkTrackChange() {
 	var prevName = Name;
 
 if($('.watch-main-col meta[itemprop="name"]') !== null ){
-Name=$('.watch-main-col meta[itemprop="name"]').attr('content');
+	Name=$('.watch-main-col meta[itemprop="name"]').attr('content');
 }
 else {
-
 	Name = 'noName';
 }
 ImgSrc=$('.watch-main-col link[itemprop="thumbnailUrl"]').attr('href');
