@@ -40,11 +40,10 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 				type : 'GET',
 				cache: true,
 				error : function() {
-					searchGoogle(searchQuery);
+					//searchGoogle(searchQuery);
 					console.log('Musicbrainz error');
 				},
 				success : function(data) {
-				
 					
 					var title_arr=$(data).find('title');
 						
@@ -53,16 +52,16 @@ function getDataFromMusicBrainz(title2,album2,artist) {
 						
 					var _artist= artistCredit[0].getElementsByTagName('artist')[0].getElementsByTagName('name')[0].textContent;
 					var title=title_arr[0].textContent.replace(/\s*\(.*?\)\s*/g, '');		
-					
-					if(title.length > title2.length - 2 && title.length < title2.length + 2) 
-						(_artist)? getLyrics(_artist, title, album2) : getLyrics('Not found', title, album2) ;
 
-					else searchGoogle(searchQuery);
+					(title && _artist) ? getLyrics(_artist, title, album2) : getLyrics(artist, title2, album2) ;
+
+					//else searchGoogle(searchQuery);
 						
 						
 					} else {
 				
-						searchGoogle(searchQuery);
+						showErr (artist,title2)
+						//searchGoogle(searchQuery);
 						
 					}
 				}

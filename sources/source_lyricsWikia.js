@@ -10,7 +10,10 @@ function getURLFromLyricWiki(artist, title)
 				data : {
 					artist : artist,
 					song : title,
-					fmt : 'xml'
+					fmt : 'xml',
+					action:'lyrics',
+					func:'getSong'
+
 				},
 				
 				dataType : 'xml',
@@ -24,6 +27,7 @@ function getURLFromLyricWiki(artist, title)
 				},
 				success : function(lyricsData) {
 					
+						console.log(lyricsData);
 					
 						// Grab lyrics wikia song url
 						var songURL = $(lyricsData).find('url').text();
@@ -31,8 +35,9 @@ function getURLFromLyricWiki(artist, title)
 
 						if (lyrics === 'Not found') {
 							
-							document.getElementById('main').innerHTML = 'Trying To Get Lyrics by Google Search ';
-							google(title,artist);
+							showErr (artist,title);
+						//	document.getElementById('main').innerHTML = 'Trying To Get Lyrics by Google Search ';
+						//	google(title,artist);
 							
 						}
 						else
@@ -55,13 +60,10 @@ function getLyricsFromLyricWikiURL(songURL,title,artist,from) {
 					
 					
 					if (lyrics.length === 0  ) {
-						if(from !=='gsearch'/* avoid recursion*/){
-						document.getElementById('main').innerHTML = 'Trying To Get Lyrics by Google Search';
-						google(title,artist);
-						console.log('nothere');
-					}else{
+					
 						showErr (artist,title);
-					}
+
+					
 					} else {
 
 						spinner('hide');
